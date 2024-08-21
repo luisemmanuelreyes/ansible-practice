@@ -8,3 +8,16 @@
     apt:
       name: apache2
       state: latest
+    when: ansible_distribution == "Ubuntu"
+
+  - name: install httpd package
+    yum:
+      name: httpd
+      state: present
+    when: ansible_distribution == "RedHat"
+
+  - name: Start httpd service
+    service:
+      name: httpd
+      state: started
+    when: ansible_distribution == "RedHat"
