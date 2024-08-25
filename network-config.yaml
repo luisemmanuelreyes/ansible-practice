@@ -1,0 +1,57 @@
+---
+- name: Change IP address - Red Hat 
+  hosts: all
+  become: yes
+  vars:
+    interface_name: ens37
+    new_ip_address: 192.168.2.204
+    prefix: 25
+    gateway: 192.168.2.254
+    dns1: 9.9.9.9
+    dns2: 9.9.5.5
+  tasks:
+    - name: Back up the current network configuration file
+      copy:
+        src: "/etc/sysconfig/network-scripts/ifcfg-{{ interface_name }}"
+        dest: "/etc/sysconfig/network-scripts/ifcfg-{{ interface_name }}.bak"
+        backup: yes
+
+    - name: Update the network configuration file with the new IP address
+      lineinfile:
+        path: "/etc/sysconfig/network-scripts/ifcfg-{{ interface_name }}"
+        regexp: "^IPADDR="
+        line: "IPADDR={{ new_ip_address }}"
+        state: present
+
+    - name: Update the prefix
+      lineinfile:
+        path: "/etc/sysconfig/network-scripts/ifcfg-{{ interface_name }}"
+        regexp: "^PREFIX="
+        line: "PREFIX={{ prefix }}"
+        state: present
+
+    - name: Update the gateway
+      lineinfile:
+        path: "/etc/sysconfig/network-scripts/ifcfg-{{ interface_name }}"
+        regexp: "^GATEWAY="
+        line: "GATEWAY={{ gateway }}"
+        state: present
+
+    - name: Update the DNS1 settings
+      lineinfile:
+        path: "/etc/sysconfig/network-scripts/ifcfg-{{ interface_name }}"
+        regexp: "^DNS1="
+        line: "DNS1={{ dns1 }}"
+        state: present
+
+    - name: Add DNS2 to the configuration file
+      lineinfile:
+        path: "/etc/sysconfig/network-scripts/ifcfg-{{ interface_name }}"
+        regexp: "^DNS2="
+        line: "DNS2={{ dns2 }}"
+        state: present
+
+    - name: Restart the network service to apply changes
+      service:
+        name: network
+        state: restarted
