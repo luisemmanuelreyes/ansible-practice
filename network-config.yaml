@@ -14,6 +14,7 @@
       copy:
         src: "/etc/sysconfig/network-scripts/ifcfg-{{ interface_name }}"
         dest: "/etc/sysconfig/network-scripts/ifcfg-{{ interface_name }}.bak"
+        remote_src: yes
         backup: yes
 
     - name: Update the network configuration file with the new IP address
