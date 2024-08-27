@@ -1,0 +1,45 @@
+- name: Back up the current network configuration file
+  copy:
+    src: "/etc/sysconfig/network-scripts/ifcfg-{{ interface_name }}"
+    dest: "/etc/sysconfig/network-scripts/ifcfg-{{ interface_name }}.bak"
+    remote_src: yes
+    backup: yes
+
+- name: Update the network configuration file with the new IP address
+  lineinfile:
+    path: "/etc/sysconfig/network-scripts/ifcfg-{{ interface_name }}"
+    regexp: "^IPADDR="
+    line: "IPADDR={{ new_ip_address }}"
+    state: present
+
+- name: Update the prefix
+  lineinfile:
+    path: "/etc/sysconfig/network-scripts/ifcfg-{{ interface_name }}"
+    regexp: "^PREFIX="
+    line: "PREFIX={{ prefix }}"
+    state: present
+
+- name: Update the gateway
+  lineinfile:
+    path: "/etc/sysconfig/network-scripts/ifcfg-{{ interface_name }}"
+    regexp: "^GATEWAY="
+    line: "GATEWAY={{ gateway }}"
+    state: present
+
+- name: Update the DNS1 settings
+  lineinfile:
+    path: "/etc/sysconfig/network-scripts/ifcfg-{{ interface_name }}"
+    regexp: "^DNS1="
+    line: "DNS1={{ dns1 }}"
+    state: present
+
+- name: Update the DNS2 settings
+  lineinfile:
+    path: "/etc/sysconfig/network-scripts/ifcfg-{{ interface_name }}"
+    regexp: "^DNS2="
+    line: "DNS2={{ dns2 }}"
+    state: present
+  #changed_when: true
+  #ignore_errors: yes
+  notify:
+  - Restart the network service
