@@ -1,0 +1,19 @@
+---
+- name: Create a local account with root permission
+  hosts: all
+  gather_facts: false
+  vars_files:
+    - local_account_password.yml
+
+  tasks:
+    - name: Create the user
+      user:
+        name: rkt_svc_account
+        password: "{{ local_account_password | password_hash('sha512') }}"
+        create_home: yes
+        shell: /bin/bash
+        groups: wheel
+        append: yes
+        state: present
+
+    

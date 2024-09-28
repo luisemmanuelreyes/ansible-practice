@@ -1,0 +1,9 @@
+---
+- name: AD join - Red Hat
+  hosts: all
+  gather_facts: false
+
+  roles:
+  - role: adjoin-RH
+    ad_groups: RKT_Users
+    domain_ou_path: OU=Non-Windows,OU=Servers,OU=RKT,DC=TEST,DC=LOCAL

@@ -40,6 +40,6 @@
     line: "DNS2={{ dns2 }}"
     state: present
   changed_when: true
-  #ignore_errors: yes
+  ignore_errors: yes
   notify:
   - Restart the network service

@@ -1,0 +1,18 @@
+- name: Permit AD groups  
+  shell: /usr/sbin/realm permit -g {{ ad_groups }}
+
+- name: Restart SSSD service
+  service:
+    name: sssd
+    state: restarted
+    enabled: yes
+
+- name: Validate the AD join
+  command: /usr/sbin/realm list
+  changed_when: false
+  register: validate_result2
+  ignore_errors: yes
+
+- name: Check the validation result
+  debug:
+    msg: "{{ validate_result2.stdout }}"

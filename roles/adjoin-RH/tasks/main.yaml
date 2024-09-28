@@ -1,0 +1,50 @@
+- name: Install required packages
+  yum:
+    name:
+      - realmd
+      - sssd
+      - oddjob
+      - oddjob-mkhomedir
+      - adcli
+      - samba-common
+    state: present
+
+- name: add local hosts dns resolution entry for test.local
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    regexp: 'test.local'
+    line: 192.168.98.132    test.local
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Validate the AD join
+  shell: /usr/sbin/realm list | grep domain-name | grep {{ ad_domain }}
+  register: validate_result
+  changed_when: false
+  ignore_errors: yes
+
+- name: Join the AD domain
+  shell: echo '{{ ad_password }}' | /usr/sbin/realm join --user={{ ad_user }} {{ ad_domain }} --computer-ou={{ domain_ou_path }}
+  ignore_errors: yes
+  when: validate_result.rc != 0
+  notify:
+  - Permit AD groups
+  - Restart SSSD service
+  - Validate the AD join
+  - Check the validation result
+
+- name: Configure sssd service
+  template:
+    src: sssd.conf.j2
+    dest: /etc/sssd/sssd.conf
+    owner: root
+    group: root
+    mode: 0600
+  when: validate_result.rc != 0
+  notify:
+  - Permit AD groups
+  - Restart SSSD service
+  - Validate the AD join
+  - Check the validation result
+

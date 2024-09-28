@@ -1,0 +1,20 @@
+
+[sssd]
+domains = test.local
+config_file_version = 2
+services = nss, pam
+
+[domain/test.local]
+ad_domain = test.local
+krb5_realm = TEST.LOCAL
+realmd_tags = manages-system joined-with-adcli 
+cache_credentials = True
+id_provider = ad
+krb5_store_password_if_offline = True
+default_shell = /bin/bash
+ldap_id_mapping = True
+dyndns_update = True
+use_fully_qualified_names = True
+fallback_homedir = /home/%u@%d
+access_provider = ad
+simple_allow_groups = RKT_Users
