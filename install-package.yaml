@@ -1,18 +1,21 @@
 ---
-
 - hosts: all
-  become: true
+  gather_facts: true
   tasks:
 
-  - name: install apache2 package
+  - name: install packages Ubuntu
     apt:
-      name: apache2
-      state: latest
+      name: 
+        - apache2
+        - nano
+      state: present
     when: ansible_distribution == "Ubuntu"
 
-  - name: install httpd package
+  - name: install packages RedHat
     yum:
-      name: httpd
+      name: 
+        - httpd
+        - nano
       state: present
     when: ansible_distribution == "RedHat"
 

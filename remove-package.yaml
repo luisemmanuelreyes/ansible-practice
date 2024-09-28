@@ -1,0 +1,21 @@
+---
+- hosts: all
+  gather_facts: true
+  tasks:
+
+  - name: remove packages Ubuntu
+    apt:
+      name: 
+        - apache2
+        - nano
+      state: absent
+    when: ansible_distribution == "Ubuntu"
+
+  - name: remove packages RedHat
+    yum:
+      name: 
+        - httpd
+        - nano
+      state: absent
+    when: ansible_distribution == "RedHat"
+
