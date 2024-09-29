@@ -1,0 +1,17 @@
+---
+- name: Unjoin server from domain  
+  hosts: all
+  gather_facts: false
+  become: yes
+  tasks:
+    - name: Domain Leave
+      command: /usr/sbin/realm leave
+      register: leave_domain
+      changed_when: false
+      ignore_errors: yes
+
+    - name: Check if the domain leave was successful
+      debug:
+        msg: "Domain leave result: {{ leave_domain.stdout }}"
+
+    
