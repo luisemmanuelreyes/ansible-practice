@@ -2,6 +2,8 @@
 - name: AD join - Red Hat
   hosts: all
   gather_facts: false
+  vars_files:
+    - ad_password.yml
 
   roles:
   - role: adjoin-RH

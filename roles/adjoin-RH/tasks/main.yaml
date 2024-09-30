@@ -27,6 +27,7 @@
 - name: Join the AD domain
   shell: echo '{{ ad_password }}' | /usr/sbin/realm join --user={{ ad_user }} {{ ad_domain }} --computer-ou={{ domain_ou_path }}
   ignore_errors: yes
+  no_log: true
   when: validate_result.rc != 0
   notify:
   - Permit AD groups

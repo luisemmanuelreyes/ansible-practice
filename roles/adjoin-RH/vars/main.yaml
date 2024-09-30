@@ -1,5 +1,4 @@
 ad_user: ADAdmin
-ad_password: Accenture123
 ad_domain: test.local
 ad_groups: RKT_Users
 
