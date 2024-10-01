@@ -1,0 +1,13 @@
+- name: Backup existing network configuration file
+  copy:
+    src: "{{ network_config_dir }}ifcfg-{{ interface }}"
+    dest: "{{ network_config_dir }}ifcfg-{{ interface }}.bak"
+    remote_src: yes
+    backup: yes
+  ignore_errors: yes
+
+- name: Deploy new network configuration for {{ interface }}
+  template:
+    src: static-ip-config.j2
+    dest: "{{ network_config_dir }}ifcfg-{{ interface }}"
+  notify: Restart the network service

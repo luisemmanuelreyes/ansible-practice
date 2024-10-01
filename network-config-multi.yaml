@@ -1,0 +1,11 @@
+---
+- name: Setup Network Configuration on Red Hat Linux 7 machines
+  hosts: rhel7
+  gather_facts: no
+  become: yes
+  vars:
+    network_config_dir: /etc/sysconfig/network-scripts/
+
+  roles:
+  - role: network-config-multi
+  
