@@ -1,11 +1,9 @@
 # Network configuration for {{ interface }}
 DEVICE={{ interface }}
-BOOTPROTO=none
+BOOTPROTO=static
 ONBOOT=yes
-IPADDR={{ ip_address }}
-NETMASK={{ netmask }}
-GATEWAY={{ gateway }}
 DNS1={{ dns1 }}
 DNS2={{ dns2 }}
 NAME={{ interface }}
 NM_CONTROLLED=no
+PEERDNS=yes
