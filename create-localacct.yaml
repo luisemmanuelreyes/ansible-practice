@@ -1,12 +1,13 @@
 ---
 - name: Create a local account with root permission
   hosts: all
-  gather_facts: false
+  gather_facts: true
+  become: yes
   vars_files:
-    - local_account_password.yml
+    - vault.yml
 
   tasks:
-    - name: Create the user
+    - name: Create the user for Non-Ubuntu distribution
       user:
         name: rkt_svc_account
         password: "{{ local_account_password | password_hash('sha512') }}"
@@ -15,5 +16,15 @@
         groups: wheel
         append: yes
         state: present
+      when: ansible_distribution != "Ubuntu" 
 
-    
+    - name: Create the user for Ubuntu distribution
+      user:
+        name: rkt_svc_account
+        password: "{{ local_account_password | password_hash('sha512') }}"
+        create_home: yes
+        shell: /bin/bash
+        groups: sudo
+        append: yes
+        state: present
+      when: ansible_distribution == "Ubuntu"    

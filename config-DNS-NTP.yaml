@@ -1,0 +1,75 @@
+---
+- name: Configure DNS and NTP
+  hosts: all
+  gather_facts: false
+  become: yes
+  vars_files:
+    - vault.yml
+
+  tasks:
+    - name: Add DNS and NTP mappings to /etc/hosts
+      ansible.builtin.lineinfile: 
+        dest: /etc/hosts
+        line: '{{ item }}'
+      with_items:
+        - '192.168.24.12  DNSServerName'
+        - '192.168.98.133  NTPServerName'
+
+    - name: Add search, domain, and nameservers in /etc/resolv.conf
+      ansible.builtin.lineinfile: 
+        dest: /etc/resolv.conf
+        line: '{{ item }}'
+      with_items:
+        - 'search dev.rocketsoftware.com'
+        - 'domain dev.rocketsoftware.com'
+        - 'nameserver 10.17.38.11' 
+        - 'nameserver 10.17.38.12'
+
+    - name: Remove stale entries in /etc/resolv.conf
+      ansible.builtin.lineinfile: 
+        dest: /etc/resolv.conf
+        line: '{{ item }}'
+        state: absent
+      with_items:
+        - 'search localdomain test.local'
+        - 'nameserver 192.168.98.2'
+        - 'nameserver 21.22.23.24' 
+        - 'nameserver 31.32.33.34'
+      
+    - name: Add dns=none in NetworkManager.conf
+      ansible.builtin.lineinfile:
+        path: /etc/NetworkManager/NetworkManager.conf
+        insertafter: '^\[main\]'
+        line: "dns=none"
+
+    - name: Restart NetworkManager service
+      service:
+        name: NetworkManager
+        state: restarted
+        enabled: yes
+
+    # - name: Add server entry for NTP in ntp.conf
+    #   ansible.builtin.lineinfile:
+    #     path: /etc/ntp.conf
+    #     line: server 192.168.24.12
+    #     state: present
+
+    # - name: Restart ntpd service
+    #   service:
+    #     name: ntpd
+    #     state: restarted
+    #     enabled: yes
+
+    - name: Add server entry for Chrony in chrony.conf
+      ansible.builtin.lineinfile:
+        path: /etc/chrony.conf
+        regexp: '^server 3'
+        insertafter: '^#server 3.rhel.pool.ntp.org iburst'
+        line: server 192.168.98.132
+        state: present
+      
+    - name: Restart chronyd service
+      service:
+        name: chronyd
+        state: restarted
+        enabled: yes

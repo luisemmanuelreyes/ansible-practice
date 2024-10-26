@@ -3,7 +3,7 @@
   hosts: all
   gather_facts: false
   vars_files:
-    - ad_password.yml
+    - vault.yml
 
   roles:
   - role: adjoin-RH

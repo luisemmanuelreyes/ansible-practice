@@ -1,0 +1,20 @@
+---
+- name: Create a local account with root permission
+  hosts: all
+  gather_facts: false
+  become: yes
+  vars_files:
+    - vault.yml
+
+  tasks:
+    - name: Create the user
+      user:
+        name: rkt_svc_account
+        password: "{{ local_account_password | password_hash('sha512') }}"
+        create_home: yes
+        shell: /bin/bash
+        groups: sudo
+        append: yes
+        state: present
+
+    

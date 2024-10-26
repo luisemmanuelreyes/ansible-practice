@@ -6,61 +6,10 @@
     backup: yes
   ignore_errors: yes
 
-- name: add local hosts DNS resolution entry 
-  ansible.builtin.lineinfile:
-    path: /etc/hosts
-    line: 192.168.98.132  windowsserver2012
-    owner: root
-    group: root
-    mode: '0644'
-
-# - name: add local hosts NTP entry 
-#   ansible.builtin.lineinfile:
-#     path: /etc/hosts
-#     line: 192.168.24.12  NTPServerName
-#     owner: root
-#     group: root
-#     mode: '0644' 
-
-- name: add local hosts Chrony entry 
-  ansible.builtin.lineinfile:
-    path: /etc/hosts
-    line: 192.168.98.133  windowsserver2016
-    owner: root
-    group: root
-    mode: '0644'       
-#DNS
 - name: Deploy new network configuration for {{ interface }}
   template:
     src: static-ip-config.j2
     dest: "{{ network_config_dir }}ifcfg-{{ interface }}"
   notify: Restart the network service
 
-- name: add nameserver entry for DNS in resolv.conf
-  ansible.builtin.lineinfile:
-    path: /etc/resolv.conf
-    line: nameserver 192.168.98.132
-    state: present
 
-- name: add dns=none in NetworkManager.conf
-  ansible.builtin.lineinfile:
-    path: /etc/NetworkManager/NetworkManager.conf
-    insertafter: '^\[main\]'
-    line: "dns=none"
-  notify: Restart NetworkManager service
-#NTP
-# - name: add server entry for NTP in ntp.conf
-#   ansible.builtin.lineinfile:
-#     path: /etc/ntp.conf
-#     line: server 192.168.24.12
-#     state: present
-#   notify: Restart ntpd service
-
-- name: add server entry for Chrony in chrony.conf
-  ansible.builtin.lineinfile:
-    path: /etc/chrony.conf
-    regexp: '^server 3'
-    insertafter: '^#server 3.rhel.pool.ntp.org iburst'
-    line: server 192.168.98.132
-    state: present
-  notify: Restart chronyd service

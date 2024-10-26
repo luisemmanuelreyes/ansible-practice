@@ -3,21 +3,3 @@
     name: network
     state: restarted
     enabled: yes
-
-- name: Restart NetworkManager service
-  service:
-    name: NetworkManager
-    state: restarted
-    enabled: yes
-
-- name: Restart ntpd service
-  service:
-    name: ntpd
-    state: restarted
-    enabled: yes
-
-- name: Restart chronyd service
-  service:
-    name: chronyd
-    state: restarted
-    enabled: yes
