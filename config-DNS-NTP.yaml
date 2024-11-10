@@ -5,131 +5,189 @@
   become: yes
   vars_files:
     - vault.yml
+  vars:
+    new_domain: "dev.rocketsoftware.com"  
+    new_hostname: '{{ short_hostname }}.{{ new_domain }}'
 
   tasks:
 
-    # - name: Read current hostname
-    #   ansible.builtin.slurp:
-    #     src: /etc/hostname
-    #   register: current_hostname
-    #   tags:
-    #   - hostname
-
-    # - name: Extract short hostname
-    #   set_fact:
-    #     short_hostname: "{{ (current_hostname['content'] | b64decode | regex_replace('\\..*$', '')).strip() }}"
-    #   tags:
-    #   - hostname
-
-    # - name: Set the FQDN
-    #   shell: "hostnamectl set-hostname '{{ short_hostname }}.dev.rocketsoftware.com'"
-    #   ignore_errors: yes
-    #   tags:
-    #   - hostname
-
-    # - name: Verify new hostname
-    #   shell: hostnamectl | grep "Static hostname"
-    #   register: hostname_output
-    #   tags:
-    #   - hostname
-
-    # - name: Display new hostname
-    #   debug:
-    #     msg: "New{{ hostname_output.stdout }}"
-    #   tags:
-    #   - hostname
-
-    # - name: Add DNS and NTP mappings to /etc/hosts
-    #   ansible.builtin.lineinfile: 
-    #     dest: /etc/hosts
-    #     line: '{{ item }}'
-    #   with_items:
-    #     - '192.168.24.12  DNSServerName'
-    #     - '192.168.98.133  NTPServerName'
-    #   tags: 
-    #   - hostname
-
-    # - name: Reboot to apply hostname changes for servers without hostnamectl
-    #   reboot:
-    #     reboot_timeout: 600
-    #   tags: 
-    #   - hostname
-
-    - name: Check if /etc/resolv.conf is a symlink
-      stat:
-        path: /etc/resolv.conf
-      register: resolv_stat
+    - name: Read current hostname
+      command: hostname
+      register: current_hostname
       ignore_errors: yes
       tags:
-      - dns 
+      - hostname
 
-    - name: Remove symlink if it exists
-      file:
-        path: /etc/resolv.conf
-        state: absent
-      when: resolv_stat.stat.islnk
+    - name: Extract short hostname
+      set_fact:
+        short_hostname: "{{ current_hostname.stdout | regex_replace('\\..*$', '') }}"
       tags:
-      - dns 
+      - hostname
 
-    - name: Backup existing /etc/resolv.conf
-      copy:
-        src: /etc/resolv.conf
-        dest: /etc/resolv.conf.bak
-        backup: yes
-      tags:
-      - dns 
-
-    - name: Create new /etc/resolv.conf
-      copy:
-        content: |
-          search dev.rocketsoftware.com
-          domain dev.rocketsoftware.com
-          nameserver 10.17.38.11
-          nameserver 10.17.38.12
-        dest: /etc/resolv.conf
-        mode: 0644  
-      tags:
-      - dns 
-
-    - name: Check if /etc/NetworkManager/NetworkManager.conf exists 
+    - name: Check if /etc/sysconfig/network file exists 
       stat: 
-        path: /etc/NetworkManager/NetworkManager.conf 
-      register: nm_conf
+        path: /etc/sysconfig/network 
+      register: sysconfig_network_exists
+
+    - name: Modify /etc/sysconfig/network 
+      lineinfile: 
+        path: /etc/sysconfig/network 
+        regexp: '^HOSTNAME=' 
+        line: "HOSTNAME={{ new_hostname }}" 
+      when: sysconfig_network_exists.stat.exists 
+      ignore_errors: yes
+
+    - name: Check if /etc/hostname file exists
+      stat: 
+        path: /etc/hostname 
+      register: etc_hostname_exists
+
+    - name: Remove old hostname entry from /etc/hostname
+      lineinfile: 
+        path: /etc/hostname
+        regexp: '^{{ current_hostname.stdout }}' 
+        state: absent 
+      when: current_hostname.stdout != ""
+
+    - name: Modify /etc/hostname 
+      lineinfile: 
+        path: /etc/hostname 
+        line: "{{ new_hostname }}" 
+      when: etc_hostname_exists.stat.exists 
+      ignore_errors: yes
+
+    - name: Check if hostnamectl command exists 
+      stat: 
+        path: /usr/bin/hostnamectl 
+      register: hostnamectl_exists
+
+    - name: Set hostname using hostnamectl
+      shell: hostnamectl set-hostname {{ new_hostname }}
+      when: hostnamectl_exists.stat.exists
+      ignore_errors: yes
       tags:
-      - dns
+      - hostname
+
+    - name: Get the primary NIC 
+      shell: ip route | grep default | awk '{print $5}' | head -n1 
+      register: primary_interface 
+      ignore_errors: yes
       
-    - name: Print message if the file does not exist 
+    - name: Get IP address of the primary NIC via ip command
+      shell: ip -o -4 addr show dev {{ primary_interface.stdout }} | awk '{print $4}' | cut -d/ -f1 
+      register: primary_ip 
+      ignore_errors: yes
+    
+    - name: Use ifconfig as fallback if ip command is not available
+      shell: ifconfig {{ primary_interface.stdout }} | grep 'inet ' | awk '{print $2}' | head -n1 
+      register: primary_ip_ifconfig 
+      when: primary_ip.stdout == "" 
+      ignore_errors: yes
+
+    - name: Get primary IP address 
+      set_fact: 
+        current_ip: "{{ primary_ip.stdout if primary_ip.stdout != '' else primary_ip_ifconfig.stdout }}"
+
+    - name: Remove old hostname entry from /etc/hosts
+      lineinfile: 
+        path: /etc/hosts 
+        regexp: '^{{ current_ip.strip() }} {{ short_hostname.strip() }}'
+        state: absent 
+      when: current_ip | length > 0 and short_hostname | length > 0
+      ignore_errors: yes
+
+    - name: Add new hostname to /etc/hosts 
+      lineinfile: 
+        path: /etc/hosts  
+        line: "{{ current_ip.strip() }} {{ new_hostname }}"
+        create: yes
+        state: present
+      when: current_ip | length > 0 and new_hostname | length > 0
+
+    - name: Print new hostname 
       debug: 
-        msg: "/etc/NetworkManager/NetworkManager.conf Does Not Exist." 
-      when: not nm_conf.stat.exists
-      tags:
-      - dns
+        msg: "The hostname was changed to: {{ new_hostname }}"
 
-    - name: Add dns=none in NetworkManager.conf
-      ansible.builtin.lineinfile:
-        path: /etc/NetworkManager/NetworkManager.conf
-        insertafter: '^\[main\]'
-        line: "dns=none"
-      when: nm_conf.stat.exists  
-      tags:
-      - dns
+    # - name: Reboot to apply hostname changes for servers without hostnamectl
+    #   reboot: 
+    #     reboot_timeout: 600
+    #   when: sysconfig_network_exists.stat.exists or etc_hostname_exists.stat.exists
 
-    - name: Restart NetworkManager service
-      service:
-        name: NetworkManager
-        state: restarted
-        enabled: yes
-      ignore_errors: yes 
-      register: result
-      tags:
-      - dns
+    # - name: Check if /etc/resolv.conf is a symlink
+    #   stat:
+    #     path: /etc/resolv.conf
+    #   register: resolv_stat
+    #   ignore_errors: yes
+    #   tags:
+    #   - dns 
 
-    - name: Print message if NetworkManager service does not exist 
-      debug: 
-        msg: "NetworkManager service does not exist. Skipping service restart" 
-      when: result.failed
-      tags:
-      - dns
+    # - name: Remove symlink if it exists
+    #   file:
+    #     path: /etc/resolv.conf
+    #     state: absent
+    #   when: resolv_stat.stat.islnk
+    #   tags:
+    #   - dns 
+
+    # - name: Backup existing /etc/resolv.conf
+    #   copy:
+    #     src: /etc/resolv.conf
+    #     dest: /etc/resolv.conf.bak
+    #     backup: yes
+    #   tags:
+    #   - dns 
+
+    # - name: Create new /etc/resolv.conf
+    #   copy:
+    #     content: |
+    #       search dev.rocketsoftware.com
+    #       domain dev.rocketsoftware.com
+    #       nameserver 10.17.38.11
+    #       nameserver 10.17.38.12
+    #     dest: /etc/resolv.conf
+    #     mode: 0644  
+    #   tags:
+    #   - dns 
+
+    # - name: Check if /etc/NetworkManager/NetworkManager.conf exists 
+    #   stat: 
+    #     path: /etc/NetworkManager/NetworkManager.conf 
+    #   register: nm_conf
+    #   tags:
+    #   - dns
+      
+    # - name: Print message if the file does not exist 
+    #   debug: 
+    #     msg: "/etc/NetworkManager/NetworkManager.conf Does Not Exist." 
+    #   when: not nm_conf.stat.exists
+    #   tags:
+    #   - dns
+
+    # - name: Add dns=none in NetworkManager.conf
+    #   ansible.builtin.lineinfile:
+    #     path: /etc/NetworkManager/NetworkManager.conf
+    #     insertafter: '^\[main\]'
+    #     line: "dns=none"
+    #   when: nm_conf.stat.exists  
+    #   tags:
+    #   - dns
+
+    # - name: Restart NetworkManager service
+    #   service:
+    #     name: NetworkManager
+    #     state: restarted
+    #     enabled: yes
+    #   ignore_errors: yes 
+    #   register: result
+    #   tags:
+    #   - dns
+
+    # - name: Print message if NetworkManager service does not exist 
+    #   debug: 
+    #     msg: "NetworkManager service does not exist. Skipping service restart" 
+    #   when: result.failed
+    #   tags:
+    #   - dns
 
     # - name: Add server entry for NTP in ntp.conf
     #   ansible.builtin.lineinfile:

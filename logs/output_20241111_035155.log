@@ -1,0 +1,475 @@
+[0;34mUsing /home/luisreyes/ansible-practice/ansible.cfg as config file[0m
+
+PLAY [Configure DNS, hostname and NTP] *****************************************
+
+TASK [Read current hostname] ***************************************************
+Monday 11 November 2024  03:52:00 +0800 (0:00:00.208)       0:00:00.208 ******* 
+[0;33mchanged: [redhat-test-01] => changed=true [0m
+[0;33m  ansible_facts:[0m
+[0;33m    discovered_interpreter_python: /usr/bin/python[0m
+[0;33m  cmd:[0m
+[0;33m  - hostname[0m
+[0;33m  delta: '0:00:00.016144'[0m
+[0;33m  end: '2024-11-10 19:52:09.204902'[0m
+[0;33m  msg: ''[0m
+[0;33m  rc: 0[0m
+[0;33m  start: '2024-11-10 19:52:09.188758'[0m
+[0;33m  stderr: ''[0m
+[0;33m  stderr_lines: <omitted>[0m
+[0;33m  stdout: redhat-test-01[0m
+[0;33m  stdout_lines: <omitted>[0m
+[0;33mchanged: [redhat-test-02] => changed=true [0m
+[0;33m  ansible_facts:[0m
+[0;33m    discovered_interpreter_python: /usr/bin/python[0m
+[0;33m  cmd:[0m
+[0;33m  - hostname[0m
+[0;33m  delta: '0:00:00.013580'[0m
+[0;33m  end: '2024-11-10 19:52:09.132925'[0m
+[0;33m  msg: ''[0m
+[0;33m  rc: 0[0m
+[0;33m  start: '2024-11-10 19:52:09.119345'[0m
+[0;33m  stderr: ''[0m
+[0;33m  stderr_lines: <omitted>[0m
+[0;33m  stdout: redhat-test-02[0m
+[0;33m  stdout_lines: <omitted>[0m
+[0;33mchanged: [ubuntu-test-01] => changed=true [0m
+[0;33m  ansible_facts:[0m
+[0;33m    discovered_interpreter_python: /usr/bin/python3[0m
+[0;33m  cmd:[0m
+[0;33m  - hostname[0m
+[0;33m  delta: '0:00:00.013523'[0m
+[0;33m  end: '2024-11-10 19:52:17.348280'[0m
+[0;33m  msg: ''[0m
+[0;33m  rc: 0[0m
+[0;33m  start: '2024-11-10 19:52:17.334757'[0m
+[0;33m  stderr: ''[0m
+[0;33m  stderr_lines: <omitted>[0m
+[0;33m  stdout: ubuntu-test-01[0m
+[0;33m  stdout_lines: <omitted>[0m
+
+TASK [Extract short hostname] **************************************************
+Monday 11 November 2024  03:52:18 +0800 (0:00:17.990)       0:00:18.198 ******* 
+[0;32mok: [ubuntu-test-01] => changed=false [0m
+[0;32m  ansible_facts:[0m
+[0;32m    short_hostname: ubuntu-test-01[0m
+[0;32mok: [redhat-test-01] => changed=false [0m
+[0;32m  ansible_facts:[0m
+[0;32m    short_hostname: redhat-test-01[0m
+[0;32mok: [redhat-test-02] => changed=false [0m
+[0;32m  ansible_facts:[0m
+[0;32m    short_hostname: redhat-test-02[0m
+
+TASK [Check if /etc/sysconfig/network file exists] *****************************
+Monday 11 November 2024  03:52:19 +0800 (0:00:00.377)       0:00:18.575 ******* 
+[0;32mok: [redhat-test-02] => changed=false [0m
+[0;32m  stat:[0m
+[0;32m    atime: 1731297048.3531206[0m
+[0;32m    attr_flags: ''[0m
+[0;32m    attributes: [][0m
+[0;32m    block_size: 4096[0m
+[0;32m    blocks: 8[0m
+[0;32m    charset: us-ascii[0m
+[0;32m    checksum: 6bd128efd1d0a88e05f1f2c2ef2afd3babf28d13[0m
+[0;32m    ctime: 1731297045.4861207[0m
+[0;32m    dev: 2051[0m
+[0;32m    device_type: 0[0m
+[0;32m    executable: false[0m
+[0;32m    exists: true[0m
+[0;32m    gid: 0[0m
+[0;32m    gr_name: root[0m
+[0;32m    inode: 25716288[0m
+[0;32m    isblk: false[0m
+[0;32m    ischr: false[0m
+[0;32m    isdir: false[0m
+[0;32m    isfifo: false[0m
+[0;32m    isgid: false[0m
+[0;32m    islnk: false[0m
+[0;32m    isreg: true[0m
+[0;32m    issock: false[0m
+[0;32m    isuid: false[0m
+[0;32m    mimetype: text/plain[0m
+[0;32m    mode: '0644'[0m
+[0;32m    mtime: 1731297045.4831207[0m
+[0;32m    nlink: 1[0m
+[0;32m    path: /etc/sysconfig/network[0m
+[0;32m    pw_name: root[0m
+[0;32m    readable: true[0m
+[0;32m    rgrp: true[0m
+[0;32m    roth: true[0m
+[0;32m    rusr: true[0m
+[0;32m    size: 62[0m
+[0;32m    uid: 0[0m
+[0;32m    version: '1236750227'[0m
+[0;32m    wgrp: false[0m
+[0;32m    woth: false[0m
+[0;32m    writeable: true[0m
+[0;32m    wusr: true[0m
+[0;32m    xgrp: false[0m
+[0;32m    xoth: false[0m
+[0;32m    xusr: false[0m
+[0;32mok: [redhat-test-01] => changed=false [0m
+[0;32m  stat:[0m
+[0;32m    exists: false[0m
+[0;32mok: [ubuntu-test-01] => changed=false [0m
+[0;32m  stat:[0m
+[0;32m    exists: false[0m
+
+TASK [Modify /etc/sysconfig/network] *******************************************
+Monday 11 November 2024  03:52:32 +0800 (0:00:13.643)       0:00:32.219 ******* 
+[0;36mskipping: [ubuntu-test-01] => changed=false [0m
+[0;36m  skip_reason: Conditional result was False[0m
+[0;36mskipping: [redhat-test-01] => changed=false [0m
+[0;36m  skip_reason: Conditional result was False[0m
+[0;33mchanged: [redhat-test-02] => changed=true [0m
+[0;33m  backup: ''[0m
+[0;33m  msg: line replaced[0m
+
+TASK [Check if /etc/hostname file exists] **************************************
+Monday 11 November 2024  03:52:40 +0800 (0:00:07.569)       0:00:39.789 ******* 
+[0;32mok: [redhat-test-02] => changed=false [0m
+[0;32m  stat:[0m
+[0;32m    exists: false[0m
+[0;32mok: [redhat-test-01] => changed=false [0m
+[0;32m  stat:[0m
+[0;32m    atime: 1731296935.673503[0m
+[0;32m    attr_flags: ''[0m
+[0;32m    attributes: [][0m
+[0;32m    block_size: 4096[0m
+[0;32m    blocks: 8[0m
+[0;32m    charset: us-ascii[0m
+[0;32m    checksum: 8f78a31dd67b55ce218bc41dda4b827125cb9db9[0m
+[0;32m    ctime: 1731296924.4535038[0m
+[0;32m    dev: 2051[0m
+[0;32m    device_type: 0[0m
+[0;32m    executable: false[0m
+[0;32m    exists: true[0m
+[0;32m    gid: 0[0m
+[0;32m    gr_name: root[0m
+[0;32m    inode: 16777632[0m
+[0;32m    isblk: false[0m
+[0;32m    ischr: false[0m
+[0;32m    isdir: false[0m
+[0;32m    isfifo: false[0m
+[0;32m    isgid: false[0m
+[0;32m    islnk: false[0m
+[0;32m    isreg: true[0m
+[0;32m    issock: false[0m
+[0;32m    isuid: false[0m
+[0;32m    mimetype: text/plain[0m
+[0;32m    mode: '0644'[0m
+[0;32m    mtime: 1731296924.4535038[0m
+[0;32m    nlink: 1[0m
+[0;32m    path: /etc/hostname[0m
+[0;32m    pw_name: root[0m
+[0;32m    readable: true[0m
+[0;32m    rgrp: true[0m
+[0;32m    roth: true[0m
+[0;32m    rusr: true[0m
+[0;32m    size: 15[0m
+[0;32m    uid: 0[0m
+[0;32m    version: '1110436119'[0m
+[0;32m    wgrp: false[0m
+[0;32m    woth: false[0m
+[0;32m    writeable: true[0m
+[0;32m    wusr: true[0m
+[0;32m    xgrp: false[0m
+[0;32m    xoth: false[0m
+[0;32m    xusr: false[0m
+[0;32mok: [ubuntu-test-01] => changed=false [0m
+[0;32m  stat:[0m
+[0;32m    atime: 1731268190.8164854[0m
+[0;32m    attr_flags: e[0m
+[0;32m    attributes:[0m
+[0;32m    - extents[0m
+[0;32m    block_size: 4096[0m
+[0;32m    blocks: 8[0m
+[0;32m    charset: us-ascii[0m
+[0;32m    checksum: b6633a6d63add4995dd7b950e768de56be4d2125[0m
+[0;32m    ctime: 1731268190.8204854[0m
+[0;32m    dev: 64768[0m
+[0;32m    device_type: 0[0m
+[0;32m    executable: false[0m
+[0;32m    exists: true[0m
+[0;32m    gid: 0[0m
+[0;32m    gr_name: root[0m
+[0;32m    inode: 918262[0m
+[0;32m    isblk: false[0m
+[0;32m    ischr: false[0m
+[0;32m    isdir: false[0m
+[0;32m    isfifo: false[0m
+[0;32m    isgid: false[0m
+[0;32m    islnk: false[0m
+[0;32m    isreg: true[0m
+[0;32m    issock: false[0m
+[0;32m    isuid: false[0m
+[0;32m    mimetype: text/plain[0m
+[0;32m    mode: '0644'[0m
+[0;32m    mtime: 1731268190.8164854[0m
+[0;32m    nlink: 1[0m
+[0;32m    path: /etc/hostname[0m
+[0;32m    pw_name: root[0m
+[0;32m    readable: true[0m
+[0;32m    rgrp: true[0m
+[0;32m    roth: true[0m
+[0;32m    rusr: true[0m
+[0;32m    size: 15[0m
+[0;32m    uid: 0[0m
+[0;32m    version: '1624729006'[0m
+[0;32m    wgrp: false[0m
+[0;32m    woth: false[0m
+[0;32m    writeable: true[0m
+[0;32m    wusr: true[0m
+[0;32m    xgrp: false[0m
+[0;32m    xoth: false[0m
+[0;32m    xusr: false[0m
+
+TASK [Remove old hostname entry from /etc/hostname] ****************************
+Monday 11 November 2024  03:52:53 +0800 (0:00:13.053)       0:00:52.842 ******* 
+[0;32mok: [redhat-test-02] => changed=false [0m
+[0;32m  msg: file not present[0m
+[0;33mchanged: [redhat-test-01] => changed=true [0m
+[0;33m  backup: ''[0m
+[0;33m  found: 1[0m
+[0;33m  msg: 1 line(s) removed[0m
+[0;33mchanged: [ubuntu-test-01] => changed=true [0m
+[0;33m  backup: ''[0m
+[0;33m  found: 1[0m
+[0;33m  msg: 1 line(s) removed[0m
+
+TASK [Modify /etc/hostname] ****************************************************
+Monday 11 November 2024  03:53:07 +0800 (0:00:13.808)       0:01:06.651 ******* 
+[0;36mskipping: [redhat-test-02] => changed=false [0m
+[0;36m  skip_reason: Conditional result was False[0m
+[0;33mchanged: [redhat-test-01] => changed=true [0m
+[0;33m  backup: ''[0m
+[0;33m  msg: line added[0m
+[0;33mchanged: [ubuntu-test-01] => changed=true [0m
+[0;33m  backup: ''[0m
+[0;33m  msg: line added[0m
+
+TASK [Check if hostnamectl command exists] *************************************
+Monday 11 November 2024  03:53:20 +0800 (0:00:13.328)       0:01:19.979 ******* 
+[0;32mok: [redhat-test-02] => changed=false [0m
+[0;32m  stat:[0m
+[0;32m    exists: false[0m
+[0;32mok: [redhat-test-01] => changed=false [0m
+[0;32m  stat:[0m
+[0;32m    atime: 1731282060.67666[0m
+[0;32m    attr_flags: ''[0m
+[0;32m    attributes: [][0m
+[0;32m    block_size: 4096[0m
+[0;32m    blocks: 640[0m
+[0;32m    charset: binary[0m
+[0;32m    checksum: 10d72f1e096c65f7b42d2542500e578e9bd70801[0m
+[0;32m    ctime: 1723845140.7319908[0m
+[0;32m    dev: 2051[0m
+[0;32m    device_type: 0[0m
+[0;32m    executable: true[0m
+[0;32m    exists: true[0m
+[0;32m    gid: 0[0m
+[0;32m    gr_name: root[0m
+[0;32m    inode: 50650437[0m
+[0;32m    isblk: false[0m
+[0;32m    ischr: false[0m
+[0;32m    isdir: false[0m
+[0;32m    isfifo: false[0m
+[0;32m    isgid: false[0m
+[0;32m    islnk: false[0m
+[0;32m    isreg: true[0m
+[0;32m    issock: false[0m
+[0;32m    isuid: false[0m
+[0;32m    mimetype: application/x-sharedlib[0m
+[0;32m    mode: '0755'[0m
+[0;32m    mtime: 1575025689.0[0m
+[0;32m    nlink: 1[0m
+[0;32m    path: /usr/bin/hostnamectl[0m
+[0;32m    pw_name: root[0m
+[0;32m    readable: true[0m
+[0;32m    rgrp: true[0m
+[0;32m    roth: true[0m
+[0;32m    rusr: true[0m
+[0;32m    size: 325688[0m
+[0;32m    uid: 0[0m
+[0;32m    version: '1347165471'[0m
+[0;32m    wgrp: false[0m
+[0;32m    woth: false[0m
+[0;32m    writeable: true[0m
+[0;32m    wusr: true[0m
+[0;32m    xgrp: true[0m
+[0;32m    xoth: true[0m
+[0;32m    xusr: true[0m
+[0;32mok: [ubuntu-test-01] => changed=false [0m
+[0;32m  stat:[0m
+[0;32m    exists: false[0m
+
+TASK [Set hostname using hostnamectl] ******************************************
+Monday 11 November 2024  03:53:34 +0800 (0:00:13.331)       0:01:33.310 ******* 
+[0;36mskipping: [ubuntu-test-01] => changed=false [0m
+[0;36m  skip_reason: Conditional result was False[0m
+[0;36mskipping: [redhat-test-02] => changed=false [0m
+[0;36m  skip_reason: Conditional result was False[0m
+[0;33mchanged: [redhat-test-01] => changed=true [0m
+[0;33m  cmd: hostnamectl set-hostname redhat-test-01.dev.rocketsoftware.com[0m
+[0;33m  delta: '0:00:00.313280'[0m
+[0;33m  end: '2024-11-10 19:53:39.948314'[0m
+[0;33m  msg: ''[0m
+[0;33m  rc: 0[0m
+[0;33m  start: '2024-11-10 19:53:39.635034'[0m
+[0;33m  stderr: ''[0m
+[0;33m  stderr_lines: <omitted>[0m
+[0;33m  stdout: ''[0m
+[0;33m  stdout_lines: <omitted>[0m
+
+TASK [Get the primary NIC] *****************************************************
+Monday 11 November 2024  03:53:41 +0800 (0:00:07.671)       0:01:40.982 ******* 
+[0;33mchanged: [redhat-test-02] => changed=true [0m
+[0;33m  cmd: ip route | grep default | awk '{print $5}' | head -n1[0m
+[0;33m  delta: '0:00:00.065038'[0m
+[0;33m  end: '2024-11-10 19:53:48.018378'[0m
+[0;33m  msg: ''[0m
+[0;33m  rc: 0[0m
+[0;33m  start: '2024-11-10 19:53:47.953340'[0m
+[0;33m  stderr: ''[0m
+[0;33m  stderr_lines: <omitted>[0m
+[0;33m  stdout: ens33[0m
+[0;33m  stdout_lines: <omitted>[0m
+[0;33mchanged: [redhat-test-01] => changed=true [0m
+[0;33m  cmd: ip route | grep default | awk '{print $5}' | head -n1[0m
+[0;33m  delta: '0:00:00.083445'[0m
+[0;33m  end: '2024-11-10 19:53:47.989186'[0m
+[0;33m  msg: ''[0m
+[0;33m  rc: 0[0m
+[0;33m  start: '2024-11-10 19:53:47.905741'[0m
+[0;33m  stderr: ''[0m
+[0;33m  stderr_lines: <omitted>[0m
+[0;33m  stdout: ens33[0m
+[0;33m  stdout_lines: <omitted>[0m
+[0;33mchanged: [ubuntu-test-01] => changed=true [0m
+[0;33m  cmd: ip route | grep default | awk '{print $5}' | head -n1[0m
+[0;33m  delta: '0:00:00.036227'[0m
+[0;33m  end: '2024-11-10 19:53:54.079913'[0m
+[0;33m  msg: ''[0m
+[0;33m  rc: 0[0m
+[0;33m  start: '2024-11-10 19:53:54.043686'[0m
+[0;33m  stderr: ''[0m
+[0;33m  stderr_lines: <omitted>[0m
+[0;33m  stdout: ens33[0m
+[0;33m  stdout_lines: <omitted>[0m
+
+TASK [Get IP address of the primary NIC via ip command] ************************
+Monday 11 November 2024  03:53:55 +0800 (0:00:14.057)       0:01:55.039 ******* 
+[0;33mchanged: [redhat-test-02] => changed=true [0m
+[0;33m  cmd: ip -o -4 addr show dev ens33 | awk '{print $4}' | cut -d/ -f1[0m
+[0;33m  delta: '0:00:00.042082'[0m
+[0;33m  end: '2024-11-10 19:54:01.927856'[0m
+[0;33m  msg: ''[0m
+[0;33m  rc: 0[0m
+[0;33m  start: '2024-11-10 19:54:01.885774'[0m
+[0;33m  stderr: ''[0m
+[0;33m  stderr_lines: <omitted>[0m
+[0;33m  stdout: 192.168.98.136[0m
+[0;33m  stdout_lines: <omitted>[0m
+[0;33mchanged: [redhat-test-01] => changed=true [0m
+[0;33m  cmd: ip -o -4 addr show dev ens33 | awk '{print $4}' | cut -d/ -f1[0m
+[0;33m  delta: '0:00:00.034847'[0m
+[0;33m  end: '2024-11-10 19:54:02.176720'[0m
+[0;33m  msg: ''[0m
+[0;33m  rc: 0[0m
+[0;33m  start: '2024-11-10 19:54:02.141873'[0m
+[0;33m  stderr: ''[0m
+[0;33m  stderr_lines: <omitted>[0m
+[0;33m  stdout: 192.168.98.131[0m
+[0;33m  stdout_lines: <omitted>[0m
+[0;33mchanged: [ubuntu-test-01] => changed=true [0m
+[0;33m  cmd: ip -o -4 addr show dev ens33 | awk '{print $4}' | cut -d/ -f1[0m
+[0;33m  delta: '0:00:00.040384'[0m
+[0;33m  end: '2024-11-10 19:54:08.060145'[0m
+[0;33m  msg: ''[0m
+[0;33m  rc: 0[0m
+[0;33m  start: '2024-11-10 19:54:08.019761'[0m
+[0;33m  stderr: ''[0m
+[0;33m  stderr_lines: <omitted>[0m
+[0;33m  stdout: 192.168.98.130[0m
+[0;33m  stdout_lines: <omitted>[0m
+
+TASK [Use ifconfig as fallback if ip command is not available] *****************
+Monday 11 November 2024  03:54:10 +0800 (0:00:14.254)       0:02:09.293 ******* 
+[0;36mskipping: [ubuntu-test-01] => changed=false [0m
+[0;36m  skip_reason: Conditional result was False[0m
+[0;36mskipping: [redhat-test-01] => changed=false [0m
+[0;36m  skip_reason: Conditional result was False[0m
+[0;36mskipping: [redhat-test-02] => changed=false [0m
+[0;36m  skip_reason: Conditional result was False[0m
+
+TASK [Get primary IP address] **************************************************
+Monday 11 November 2024  03:54:10 +0800 (0:00:00.341)       0:02:09.635 ******* 
+[0;32mok: [ubuntu-test-01] => changed=false [0m
+[0;32m  ansible_facts:[0m
+[0;32m    current_ip: 192.168.98.130[0m
+[0;32mok: [redhat-test-01] => changed=false [0m
+[0;32m  ansible_facts:[0m
+[0;32m    current_ip: 192.168.98.131[0m
+[0;32mok: [redhat-test-02] => changed=false [0m
+[0;32m  ansible_facts:[0m
+[0;32m    current_ip: 192.168.98.136[0m
+
+TASK [Remove old hostname entry from /etc/hosts] *******************************
+Monday 11 November 2024  03:54:10 +0800 (0:00:00.410)       0:02:10.046 ******* 
+[0;33mchanged: [redhat-test-01] => changed=true [0m
+[0;33m  backup: ''[0m
+[0;33m  found: 1[0m
+[0;33m  msg: 1 line(s) removed[0m
+[0;33mchanged: [redhat-test-02] => changed=true [0m
+[0;33m  backup: ''[0m
+[0;33m  found: 1[0m
+[0;33m  msg: 1 line(s) removed[0m
+[0;33mchanged: [ubuntu-test-01] => changed=true [0m
+[0;33m  backup: ''[0m
+[0;33m  found: 1[0m
+[0;33m  msg: 1 line(s) removed[0m
+
+TASK [Add new hostname to /etc/hosts] ******************************************
+Monday 11 November 2024  03:54:25 +0800 (0:00:14.674)       0:02:24.721 ******* 
+[0;33mchanged: [redhat-test-01] => changed=true [0m
+[0;33m  backup: ''[0m
+[0;33m  msg: line added[0m
+[0;33mchanged: [redhat-test-02] => changed=true [0m
+[0;33m  backup: ''[0m
+[0;33m  msg: line added[0m
+[0;33mchanged: [ubuntu-test-01] => changed=true [0m
+[0;33m  backup: ''[0m
+[0;33m  msg: line added[0m
+
+TASK [Print new hostname] ******************************************************
+Monday 11 November 2024  03:54:38 +0800 (0:00:12.961)       0:02:37.682 ******* 
+[0;32mok: [ubuntu-test-01] => [0m
+[0;32m  msg: 'The hostname was changed to: ubuntu-test-01.dev.rocketsoftware.com'[0m
+[0;32mok: [redhat-test-01] => [0m
+[0;32m  msg: 'The hostname was changed to: redhat-test-01.dev.rocketsoftware.com'[0m
+[0;32mok: [redhat-test-02] => [0m
+[0;32m  msg: 'The hostname was changed to: redhat-test-02.dev.rocketsoftware.com'[0m
+
+PLAY RECAP *********************************************************************
+[0;33mredhat-test-01[0m             : [0;32mok=14  [0m [0;33mchanged=8   [0m unreachable=0    failed=0    [0;36mskipped=2   [0m rescued=0    ignored=0   
+[0;33mredhat-test-02[0m             : [0;32mok=13  [0m [0;33mchanged=6   [0m unreachable=0    failed=0    [0;36mskipped=3   [0m rescued=0    ignored=0   
+[0;33mubuntu-test-01[0m             : [0;32mok=13  [0m [0;33mchanged=7   [0m unreachable=0    failed=0    [0;36mskipped=3   [0m rescued=0    ignored=0   
+
+Monday 11 November 2024  03:54:38 +0800 (0:00:00.416)       0:02:38.098 ******* 
+=============================================================================== 
+Read current hostname -------------------------------------------------- 17.99s
+Remove old hostname entry from /etc/hosts ------------------------------ 14.67s
+Get IP address of the primary NIC via ip command ----------------------- 14.25s
+Get the primary NIC ---------------------------------------------------- 14.06s
+Remove old hostname entry from /etc/hostname --------------------------- 13.81s
+Check if /etc/sysconfig/network file exists ---------------------------- 13.64s
+Check if hostnamectl command exists ------------------------------------ 13.33s
+Modify /etc/hostname --------------------------------------------------- 13.33s
+Check if /etc/hostname file exists ------------------------------------- 13.05s
+Add new hostname to /etc/hosts ----------------------------------------- 12.96s
+Set hostname using hostnamectl ------------------------------------------ 7.67s
+Modify /etc/sysconfig/network ------------------------------------------- 7.57s
+Print new hostname ------------------------------------------------------ 0.42s
+Get primary IP address -------------------------------------------------- 0.41s
+Extract short hostname -------------------------------------------------- 0.38s
+Use ifconfig as fallback if ip command is not available ----------------- 0.34s
+Playbook run took 0 days, 0 hours, 2 minutes, 38 seconds
