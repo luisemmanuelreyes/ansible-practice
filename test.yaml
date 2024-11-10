@@ -1,0 +1,10 @@
+- name: Test Playbook
+  hosts: localhost
+  gather_facts: false
+  become: yes
+  tasks:
+    - name: Print a message
+      debug:
+        msg: "This is a test message."
+    - name: Sleep for a bit
+      command: sleep 5

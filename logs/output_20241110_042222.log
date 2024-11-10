@@ -1,0 +1,769 @@
+[0;34mUsing /home/luisreyes/ansible-practice/ansible.cfg as config file[0m
+
+PLAY [Configure DNS, hostname and NTP] *****************************************
+
+TASK [Check if /etc/resolv.conf is a symlink] **********************************
+Sunday 10 November 2024  04:22:46 +0800 (0:00:00.457)       0:00:00.457 ******* 
+[0;32mok: [redhat-test-02] => changed=false [0m
+[0;32m  ansible_facts:[0m
+[0;32m    discovered_interpreter_python: /usr/bin/python[0m
+[0;32m  stat:[0m
+[0;32m    atime: 1731211932.23178[0m
+[0;32m    attr_flags: ''[0m
+[0;32m    attributes: [][0m
+[0;32m    block_size: 4096[0m
+[0;32m    blocks: 8[0m
+[0;32m    charset: us-ascii[0m
+[0;32m    checksum: b0448bfd6d623b5aa2d92d02b291b1cee04faa54[0m
+[0;32m    ctime: 1731211932.16878[0m
+[0;32m    dev: 2051[0m
+[0;32m    device_type: 0[0m
+[0;32m    executable: false[0m
+[0;32m    exists: true[0m
+[0;32m    gid: 0[0m
+[0;32m    gr_name: root[0m
+[0;32m    inode: 8986585[0m
+[0;32m    isblk: false[0m
+[0;32m    ischr: false[0m
+[0;32m    isdir: false[0m
+[0;32m    isfifo: false[0m
+[0;32m    isgid: false[0m
+[0;32m    islnk: false[0m
+[0;32m    isreg: true[0m
+[0;32m    issock: false[0m
+[0;32m    isuid: false[0m
+[0;32m    mimetype: text/plain[0m
+[0;32m    mode: '0644'[0m
+[0;32m    mtime: 1731211925.9027796[0m
+[0;32m    nlink: 1[0m
+[0;32m    path: /etc/resolv.conf[0m
+[0;32m    pw_name: root[0m
+[0;32m    readable: true[0m
+[0;32m    rgrp: true[0m
+[0;32m    roth: true[0m
+[0;32m    rusr: true[0m
+[0;32m    size: 106[0m
+[0;32m    uid: 0[0m
+[0;32m    version: '18446744072046371036'[0m
+[0;32m    wgrp: false[0m
+[0;32m    woth: false[0m
+[0;32m    writeable: true[0m
+[0;32m    wusr: true[0m
+[0;32m    xgrp: false[0m
+[0;32m    xoth: false[0m
+[0;32m    xusr: false[0m
+[0;32mok: [redhat-test-01] => changed=false [0m
+[0;32m  ansible_facts:[0m
+[0;32m    discovered_interpreter_python: /usr/bin/python[0m
+[0;32m  stat:[0m
+[0;32m    atime: 1731211931.693427[0m
+[0;32m    attr_flags: ''[0m
+[0;32m    attributes: [][0m
+[0;32m    block_size: 4096[0m
+[0;32m    blocks: 8[0m
+[0;32m    charset: us-ascii[0m
+[0;32m    checksum: b0448bfd6d623b5aa2d92d02b291b1cee04faa54[0m
+[0;32m    ctime: 1731211931.6234272[0m
+[0;32m    dev: 2051[0m
+[0;32m    device_type: 0[0m
+[0;32m    executable: false[0m
+[0;32m    exists: true[0m
+[0;32m    gid: 0[0m
+[0;32m    gr_name: root[0m
+[0;32m    inode: 17379320[0m
+[0;32m    isblk: false[0m
+[0;32m    ischr: false[0m
+[0;32m    isdir: false[0m
+[0;32m    isfifo: false[0m
+[0;32m    isgid: false[0m
+[0;32m    islnk: false[0m
+[0;32m    isreg: true[0m
+[0;32m    issock: false[0m
+[0;32m    isuid: false[0m
+[0;32m    mimetype: text/plain[0m
+[0;32m    mode: '0644'[0m
+[0;32m    mtime: 1731211925.3434267[0m
+[0;32m    nlink: 1[0m
+[0;32m    path: /etc/resolv.conf[0m
+[0;32m    pw_name: root[0m
+[0;32m    readable: true[0m
+[0;32m    rgrp: true[0m
+[0;32m    roth: true[0m
+[0;32m    rusr: true[0m
+[0;32m    size: 106[0m
+[0;32m    uid: 0[0m
+[0;32m    version: '319184898'[0m
+[0;32m    wgrp: false[0m
+[0;32m    woth: false[0m
+[0;32m    writeable: true[0m
+[0;32m    wusr: true[0m
+[0;32m    xgrp: false[0m
+[0;32m    xoth: false[0m
+[0;32m    xusr: false[0m
+[0;32mok: [ubuntu-test-01] => changed=false [0m
+[0;32m  ansible_facts:[0m
+[0;32m    discovered_interpreter_python: /usr/bin/python3[0m
+[0;32m  stat:[0m
+[0;32m    atime: 1731183157.0225165[0m
+[0;32m    attr_flags: e[0m
+[0;32m    attributes:[0m
+[0;32m    - extents[0m
+[0;32m    block_size: 4096[0m
+[0;32m    blocks: 8[0m
+[0;32m    charset: us-ascii[0m
+[0;32m    checksum: b0448bfd6d623b5aa2d92d02b291b1cee04faa54[0m
+[0;32m    ctime: 1731183142.9417305[0m
+[0;32m    dev: 64768[0m
+[0;32m    device_type: 0[0m
+[0;32m    executable: false[0m
+[0;32m    exists: true[0m
+[0;32m    gid: 0[0m
+[0;32m    gr_name: root[0m
+[0;32m    inode: 655398[0m
+[0;32m    isblk: false[0m
+[0;32m    ischr: false[0m
+[0;32m    isdir: false[0m
+[0;32m    isfifo: false[0m
+[0;32m    isgid: false[0m
+[0;32m    islnk: false[0m
+[0;32m    isreg: true[0m
+[0;32m    issock: false[0m
+[0;32m    isuid: false[0m
+[0;32m    mimetype: text/plain[0m
+[0;32m    mode: '0644'[0m
+[0;32m    mtime: 1731183133.6851995[0m
+[0;32m    nlink: 1[0m
+[0;32m    path: /etc/resolv.conf[0m
+[0;32m    pw_name: root[0m
+[0;32m    readable: true[0m
+[0;32m    rgrp: true[0m
+[0;32m    roth: true[0m
+[0;32m    rusr: true[0m
+[0;32m    size: 106[0m
+[0;32m    uid: 0[0m
+[0;32m    version: '3657730156'[0m
+[0;32m    wgrp: false[0m
+[0;32m    woth: false[0m
+[0;32m    writeable: true[0m
+[0;32m    wusr: true[0m
+[0;32m    xgrp: false[0m
+[0;32m    xoth: false[0m
+[0;32m    xusr: false[0m
+
+TASK [Remove symlink if it exists] *********************************************
+Sunday 10 November 2024  04:23:04 +0800 (0:00:17.683)       0:00:18.141 ******* 
+[0;36mskipping: [ubuntu-test-01] => changed=false [0m
+[0;36m  skip_reason: Conditional result was False[0m
+[0;36mskipping: [redhat-test-01] => changed=false [0m
+[0;36m  skip_reason: Conditional result was False[0m
+[0;36mskipping: [redhat-test-02] => changed=false [0m
+[0;36m  skip_reason: Conditional result was False[0m
+
+TASK [Backup existing /etc/resolv.conf] ****************************************
+Sunday 10 November 2024  04:23:04 +0800 (0:00:00.334)       0:00:18.475 ******* 
+[0;32mok: [redhat-test-01] => changed=false [0m
+[0;32m  checksum: 9f0d9560554c7bbae183542310170cdf1f96f8cf[0m
+[0;32m  dest: /etc/resolv.conf.bak[0m
+[0;32m  gid: 0[0m
+[0;32m  group: root[0m
+[0;32m  mode: '0644'[0m
+[0;32m  owner: root[0m
+[0;32m  path: /etc/resolv.conf.bak[0m
+[0;32m  secontext: system_u:object_r:net_conf_t:s0[0m
+[0;32m  size: 263[0m
+[0;32m  state: file[0m
+[0;32m  uid: 0[0m
+[0;32mok: [redhat-test-02] => changed=false [0m
+[0;32m  checksum: 9f0d9560554c7bbae183542310170cdf1f96f8cf[0m
+[0;32m  dest: /etc/resolv.conf.bak[0m
+[0;32m  gid: 0[0m
+[0;32m  group: root[0m
+[0;32m  mode: '0644'[0m
+[0;32m  owner: root[0m
+[0;32m  path: /etc/resolv.conf.bak[0m
+[0;32m  secontext: system_u:object_r:net_conf_t:s0[0m
+[0;32m  size: 263[0m
+[0;32m  state: file[0m
+[0;32m  uid: 0[0m
+[0;32mok: [ubuntu-test-01] => changed=false [0m
+[0;32m  checksum: 9f0d9560554c7bbae183542310170cdf1f96f8cf[0m
+[0;32m  dest: /etc/resolv.conf.bak[0m
+[0;32m  gid: 0[0m
+[0;32m  group: root[0m
+[0;32m  mode: '0644'[0m
+[0;32m  owner: root[0m
+[0;32m  path: /etc/resolv.conf.bak[0m
+[0;32m  size: 263[0m
+[0;32m  state: file[0m
+[0;32m  uid: 0[0m
+
+TASK [Create new /etc/resolv.conf] *********************************************
+Sunday 10 November 2024  04:23:26 +0800 (0:00:21.387)       0:00:39.862 ******* 
+[0;32mok: [redhat-test-01] => changed=false [0m
+[0;32m  checksum: b0448bfd6d623b5aa2d92d02b291b1cee04faa54[0m
+[0;32m  dest: /etc/resolv.conf[0m
+[0;32m  gid: 0[0m
+[0;32m  group: root[0m
+[0;32m  mode: '0644'[0m
+[0;32m  owner: root[0m
+[0;32m  path: /etc/resolv.conf[0m
+[0;32m  secontext: system_u:object_r:net_conf_t:s0[0m
+[0;32m  size: 106[0m
+[0;32m  state: file[0m
+[0;32m  uid: 0[0m
+[0;32mok: [redhat-test-02] => changed=false [0m
+[0;32m  checksum: b0448bfd6d623b5aa2d92d02b291b1cee04faa54[0m
+[0;32m  dest: /etc/resolv.conf[0m
+[0;32m  gid: 0[0m
+[0;32m  group: root[0m
+[0;32m  mode: '0644'[0m
+[0;32m  owner: root[0m
+[0;32m  path: /etc/resolv.conf[0m
+[0;32m  secontext: system_u:object_r:net_conf_t:s0[0m
+[0;32m  size: 106[0m
+[0;32m  state: file[0m
+[0;32m  uid: 0[0m
+[0;32mok: [ubuntu-test-01] => changed=false [0m
+[0;32m  checksum: b0448bfd6d623b5aa2d92d02b291b1cee04faa54[0m
+[0;32m  dest: /etc/resolv.conf[0m
+[0;32m  gid: 0[0m
+[0;32m  group: root[0m
+[0;32m  mode: '0644'[0m
+[0;32m  owner: root[0m
+[0;32m  path: /etc/resolv.conf[0m
+[0;32m  size: 106[0m
+[0;32m  state: file[0m
+[0;32m  uid: 0[0m
+
+TASK [Check if /etc/NetworkManager/NetworkManager.conf exists] *****************
+Sunday 10 November 2024  04:23:47 +0800 (0:00:20.827)       0:01:00.690 ******* 
+[0;32mok: [redhat-test-02] => changed=false [0m
+[0;32m  stat:[0m
+[0;32m    atime: 1731209679.4246323[0m
+[0;32m    attr_flags: ''[0m
+[0;32m    attributes: [][0m
+[0;32m    block_size: 4096[0m
+[0;32m    blocks: 8[0m
+[0;32m    charset: us-ascii[0m
+[0;32m    checksum: 494a533a098e11942f80992272ec6af521b63249[0m
+[0;32m    ctime: 1731209662.527631[0m
+[0;32m    dev: 2051[0m
+[0;32m    device_type: 0[0m
+[0;32m    executable: false[0m
+[0;32m    exists: true[0m
+[0;32m    gid: 0[0m
+[0;32m    gr_name: root[0m
+[0;32m    inode: 8986603[0m
+[0;32m    isblk: false[0m
+[0;32m    ischr: false[0m
+[0;32m    isdir: false[0m
+[0;32m    isfifo: false[0m
+[0;32m    isgid: false[0m
+[0;32m    islnk: false[0m
+[0;32m    isreg: true[0m
+[0;32m    issock: false[0m
+[0;32m    isuid: false[0m
+[0;32m    mimetype: text/plain[0m
+[0;32m    mode: '0644'[0m
+[0;32m    mtime: 1731209662.5216312[0m
+[0;32m    nlink: 1[0m
+[0;32m    path: /etc/NetworkManager/NetworkManager.conf[0m
+[0;32m    pw_name: root[0m
+[0;32m    readable: true[0m
+[0;32m    rgrp: true[0m
+[0;32m    roth: true[0m
+[0;32m    rusr: true[0m
+[0;32m    size: 2153[0m
+[0;32m    uid: 0[0m
+[0;32m    version: '24879945'[0m
+[0;32m    wgrp: false[0m
+[0;32m    woth: false[0m
+[0;32m    writeable: true[0m
+[0;32m    wusr: true[0m
+[0;32m    xgrp: false[0m
+[0;32m    xoth: false[0m
+[0;32m    xusr: false[0m
+[0;32mok: [redhat-test-01] => changed=false [0m
+[0;32m  stat:[0m
+[0;32m    atime: 1731185274.8934202[0m
+[0;32m    attr_flags: ''[0m
+[0;32m    attributes: [][0m
+[0;32m    block_size: 4096[0m
+[0;32m    blocks: 8[0m
+[0;32m    charset: us-ascii[0m
+[0;32m    checksum: 494a533a098e11942f80992272ec6af521b63249[0m
+[0;32m    ctime: 1731185089.317408[0m
+[0;32m    dev: 2051[0m
+[0;32m    device_type: 0[0m
+[0;32m    executable: false[0m
+[0;32m    exists: true[0m
+[0;32m    gid: 0[0m
+[0;32m    gr_name: root[0m
+[0;32m    inode: 16777288[0m
+[0;32m    isblk: false[0m
+[0;32m    ischr: false[0m
+[0;32m    isdir: false[0m
+[0;32m    isfifo: false[0m
+[0;32m    isgid: false[0m
+[0;32m    islnk: false[0m
+[0;32m    isreg: true[0m
+[0;32m    issock: false[0m
+[0;32m    isuid: false[0m
+[0;32m    mimetype: text/plain[0m
+[0;32m    mode: '0644'[0m
+[0;32m    mtime: 1731185089.314408[0m
+[0;32m    nlink: 1[0m
+[0;32m    path: /etc/NetworkManager/NetworkManager.conf[0m
+[0;32m    pw_name: root[0m
+[0;32m    readable: true[0m
+[0;32m    rgrp: true[0m
+[0;32m    roth: true[0m
+[0;32m    rusr: true[0m
+[0;32m    size: 2153[0m
+[0;32m    uid: 0[0m
+[0;32m    version: '1788573991'[0m
+[0;32m    wgrp: false[0m
+[0;32m    woth: false[0m
+[0;32m    writeable: true[0m
+[0;32m    wusr: true[0m
+[0;32m    xgrp: false[0m
+[0;32m    xoth: false[0m
+[0;32m    xusr: false[0m
+[0;32mok: [ubuntu-test-01] => changed=false [0m
+[0;32m  stat:[0m
+[0;32m    exists: false[0m
+
+TASK [Print message if the file does not exist] ********************************
+Sunday 10 November 2024  04:24:00 +0800 (0:00:13.796)       0:01:14.486 ******* 
+[0;32mok: [ubuntu-test-01] => [0m
+[0;32m  msg: /etc/NetworkManager/NetworkManager.conf Does Not Exist.[0m
+[0;36mskipping: [redhat-test-01] => [0m
+[0;36mskipping: [redhat-test-02] => [0m
+
+TASK [Add dns=none in NetworkManager.conf] *************************************
+Sunday 10 November 2024  04:24:01 +0800 (0:00:00.425)       0:01:14.912 ******* 
+[0;36mskipping: [ubuntu-test-01] => changed=false [0m
+[0;36m  skip_reason: Conditional result was False[0m
+[0;32mok: [redhat-test-02] => changed=false [0m
+[0;32m  backup: ''[0m
+[0;32m  msg: ''[0m
+[0;32mok: [redhat-test-01] => changed=false [0m
+[0;32m  backup: ''[0m
+[0;32m  msg: ''[0m
+
+TASK [Check if NetworkManager service exists] **********************************
+Sunday 10 November 2024  04:24:10 +0800 (0:00:09.328)       0:01:24.240 ******* 
+[0;33mchanged: [redhat-test-01] => changed=true [0m
+[0;33m  cmd:[0m
+[0;33m  - service[0m
+[0;33m  - NetworkManager[0m
+[0;33m  - status[0m
+[0;33m  delta: '0:00:00.109496'[0m
+[0;33m  end: '2024-11-09 20:24:17.201936'[0m
+[0;33m  msg: ''[0m
+[0;33m  rc: 0[0m
+[0;33m  start: '2024-11-09 20:24:17.092440'[0m
+[0;33m  stderr: Redirecting to /bin/systemctl status NetworkManager.service[0m
+[0;33m  stderr_lines: <omitted>[0m
+[0;33m  stdout: |-[0m
+[0;33m    ● NetworkManager.service - Network Manager[0m
+[0;33m       Loaded: loaded (/usr/lib/systemd/system/NetworkManager.service; enabled; vendor preset: enabled)[0m
+[0;33m       Active: active (running) since Sat 2024-11-09 20:14:15 PST; 10min ago[0m
+[0;33m         Docs: man:NetworkManager(8)[0m
+[0;33m     Main PID: 13962 (NetworkManager)[0m
+[0;33m       CGroup: /system.slice/NetworkManager.service[0m
+[0;33m               ├─13962 /usr/sbin/NetworkManager --no-daemon[0m
+[0;33m               └─13983 /sbin/dhclient -d -q -sf /usr/libexec/nm-dhcp-helper -pf /var/run/dhclient-ens33.pid -lf /var/lib/NetworkManager/dhclient-911773b5-a025-4d99-a965-9709fa3e53c3-ens33.lease -cf /var/lib/NetworkManager/dhclient-ens33.conf ens33[0m
+[0;33m  [0m
+[0;33m    Nov 09 20:14:17 redhat-test-01.dev.rocketsoftware.com NetworkManager[13962]: <info>  [1731212057.0645] dhcp4 (ens33):   domain name 'localdomain'[0m
+[0;33m    Nov 09 20:14:17 redhat-test-01.dev.rocketsoftware.com NetworkManager[13962]: <info>  [1731212057.0646] dhcp4 (ens33): state changed unknown -> bound[0m
+[0;33m    Nov 09 20:14:17 redhat-test-01.dev.rocketsoftware.com NetworkManager[13962]: <info>  [1731212057.0681] device (ens33): state change: ip-config -> ip-check (reason 'none', sys-iface-state: 'assume')[0m
+[0;33m    Nov 09 20:14:17 redhat-test-01.dev.rocketsoftware.com NetworkManager[13962]: <info>  [1731212057.0700] device (ens33): state change: ip-check -> secondaries (reason 'none', sys-iface-state: 'assume')[0m
+[0;33m    Nov 09 20:14:17 redhat-test-01.dev.rocketsoftware.com NetworkManager[13962]: <info>  [1731212057.0705] device (ens33): state change: secondaries -> activated (reason 'none', sys-iface-state: 'assume')[0m
+[0;33m    Nov 09 20:14:17 redhat-test-01.dev.rocketsoftware.com NetworkManager[13962]: <info>  [1731212057.0720] manager: NetworkManager state is now CONNECTED_SITE[0m
+[0;33m    Nov 09 20:14:17 redhat-test-01.dev.rocketsoftware.com NetworkManager[13962]: <info>  [1731212057.1163] device (ens33): Activation: successful, device activated.[0m
+[0;33m    Nov 09 20:14:17 redhat-test-01.dev.rocketsoftware.com NetworkManager[13962]: <info>  [1731212057.1176] manager: NetworkManager state is now CONNECTED_GLOBAL[0m
+[0;33m    Nov 09 20:14:17 redhat-test-01.dev.rocketsoftware.com NetworkManager[13962]: <info>  [1731212057.1183] manager: startup complete[0m
+[0;33m    Nov 09 20:14:17 redhat-test-01.dev.rocketsoftware.com dhclient[13983]: bound to 192.168.98.131 -- renewal in 747 seconds.[0m
+[0;33m  stdout_lines: <omitted>[0m
+[0;33mchanged: [redhat-test-02] => changed=true [0m
+[0;33m  cmd:[0m
+[0;33m  - service[0m
+[0;33m  - NetworkManager[0m
+[0;33m  - status[0m
+[0;33m  delta: '0:00:00.135356'[0m
+[0;33m  end: '2024-11-09 20:24:18.086038'[0m
+[0;33m  msg: ''[0m
+[0;33m  rc: 0[0m
+[0;33m  start: '2024-11-09 20:24:17.950682'[0m
+[0;33m  stderr: Redirecting to /bin/systemctl status NetworkManager.service[0m
+[0;33m  stderr_lines: <omitted>[0m
+[0;33m  stdout: |-[0m
+[0;33m    ● NetworkManager.service - Network Manager[0m
+[0;33m       Loaded: loaded (/usr/lib/systemd/system/NetworkManager.service; enabled; vendor preset: enabled)[0m
+[0;33m       Active: active (running) since Sat 2024-11-09 20:13:16 PST; 11min ago[0m
+[0;33m         Docs: man:NetworkManager(8)[0m
+[0;33m     Main PID: 11325 (NetworkManager)[0m
+[0;33m       CGroup: /system.slice/NetworkManager.service[0m
+[0;33m               ├─11325 /usr/sbin/NetworkManager --no-daemon[0m
+[0;33m               └─11344 /sbin/dhclient -d -q -sf /usr/libexec/nm-dhcp-helper -pf /var/run/dhclient-ens33.pid -lf /var/lib/NetworkManager/dhclient-43fdb11d-f493-4bdc-b59a-4d3ee02d028c-ens33.lease -cf /var/lib/NetworkManager/dhclient-ens33.conf ens33[0m
+[0;33m  [0m
+[0;33m    Nov 09 20:13:17 redhat-test-02 NetworkManager[11325]: <info>  [1731211997.7054] dhcp4 (ens33):   domain name 'localdomain'[0m
+[0;33m    Nov 09 20:13:17 redhat-test-02 NetworkManager[11325]: <info>  [1731211997.7055] dhcp4 (ens33): state changed unknown -> bound[0m
+[0;33m    Nov 09 20:13:17 redhat-test-02 NetworkManager[11325]: <info>  [1731211997.7070] device (ens33): state change: ip-config -> ip-check (reason 'none', sys-iface-state: 'assume')[0m
+[0;33m    Nov 09 20:13:17 redhat-test-02 NetworkManager[11325]: <info>  [1731211997.7083] device (ens33): state change: ip-check -> secondaries (reason 'none', sys-iface-state: 'assume')[0m
+[0;33m    Nov 09 20:13:17 redhat-test-02 NetworkManager[11325]: <info>  [1731211997.7087] device (ens33): state change: secondaries -> activated (reason 'none', sys-iface-state: 'assume')[0m
+[0;33m    Nov 09 20:13:17 redhat-test-02 NetworkManager[11325]: <info>  [1731211997.7127] manager: NetworkManager state is now CONNECTED_SITE[0m
+[0;33m    Nov 09 20:13:17 redhat-test-02 dhclient[11344]: bound to 192.168.98.136 -- renewal in 874 seconds.[0m
+[0;33m    Nov 09 20:13:17 redhat-test-02 NetworkManager[11325]: <info>  [1731211997.7525] device (ens33): Activation: successful, device activated.[0m
+[0;33m    Nov 09 20:13:17 redhat-test-02 NetworkManager[11325]: <info>  [1731211997.7542] manager: NetworkManager state is now CONNECTED_GLOBAL[0m
+[0;33m    Nov 09 20:13:17 redhat-test-02 NetworkManager[11325]: <info>  [1731211997.7550] manager: startup complete[0m
+[0;33m  stdout_lines: <omitted>[0m
+[0;31mfatal: [ubuntu-test-01]: FAILED! => changed=true [0m
+[0;31m  cmd:[0m
+[0;31m  - service[0m
+[0;31m  - NetworkManager[0m
+[0;31m  - status[0m
+[0;31m  delta: '0:00:00.098493'[0m
+[0;31m  end: '2024-11-09 20:24:22.454998'[0m
+[0;31m  msg: non-zero return code[0m
+[0;31m  rc: 4[0m
+[0;31m  start: '2024-11-09 20:24:22.356505'[0m
+[0;31m  stderr: Unit NetworkManager.service could not be found.[0m
+[0;31m  stderr_lines: <omitted>[0m
+[0;31m  stdout: ''[0m
+[0;31m  stdout_lines: <omitted>[0m
+[0;36m...ignoring[0m
+
+TASK [Print message if NetworkManager service does not exist] ******************
+Sunday 10 November 2024  04:24:24 +0800 (0:00:14.202)       0:01:38.443 ******* 
+[0;32mok: [ubuntu-test-01] => [0m
+[0;32m  msg: NetworkManager service does not exist or cannot be checked.[0m
+[0;36mskipping: [redhat-test-01] => [0m
+[0;36mskipping: [redhat-test-02] => [0m
+
+TASK [Restart NetworkManager service] ******************************************
+Sunday 10 November 2024  04:24:25 +0800 (0:00:00.511)       0:01:38.955 ******* 
+[0;36mskipping: [ubuntu-test-01] => changed=false [0m
+[0;36m  skip_reason: Conditional result was False[0m
+[0;33mchanged: [redhat-test-02] => changed=true [0m
+[0;33m  enabled: true[0m
+[0;33m  name: NetworkManager[0m
+[0;33m  state: started[0m
+[0;33m  status:[0m
+[0;33m    ActiveEnterTimestamp: Sat 2024-11-09 20:13:16 PST[0m
+[0;33m    ActiveEnterTimestampMonotonic: '16785589827'[0m
+[0;33m    ActiveExitTimestamp: Sat 2024-11-09 20:13:16 PST[0m
+[0;33m    ActiveExitTimestampMonotonic: '16785410498'[0m
+[0;33m    ActiveState: active[0m
+[0;33m    After: network-pre.target dbus.service basic.target systemd-journald.socket system.slice[0m
+[0;33m    AllowIsolate: 'no'[0m
+[0;33m    AmbientCapabilities: '0'[0m
+[0;33m    AssertResult: 'yes'[0m
+[0;33m    AssertTimestamp: Sat 2024-11-09 20:13:16 PST[0m
+[0;33m    AssertTimestampMonotonic: '16785496140'[0m
+[0;33m    Before: shutdown.target multi-user.target NetworkManager-wait-online.service network.service network.target[0m
+[0;33m    BlockIOAccounting: 'no'[0m
+[0;33m    BlockIOWeight: '18446744073709551615'[0m
+[0;33m    BusName: org.freedesktop.NetworkManager[0m
+[0;33m    CPUAccounting: 'no'[0m
+[0;33m    CPUQuotaPerSecUSec: infinity[0m
+[0;33m    CPUSchedulingPolicy: '0'[0m
+[0;33m    CPUSchedulingPriority: '0'[0m
+[0;33m    CPUSchedulingResetOnFork: 'no'[0m
+[0;33m    CPUShares: '18446744073709551615'[0m
+[0;33m    CanIsolate: 'no'[0m
+[0;33m    CanReload: 'yes'[0m
+[0;33m    CanStart: 'yes'[0m
+[0;33m    CanStop: 'yes'[0m
+[0;33m    CapabilityBoundingSet: '539309282'[0m
+[0;33m    ConditionResult: 'yes'[0m
+[0;33m    ConditionTimestamp: Sat 2024-11-09 20:13:16 PST[0m
+[0;33m    ConditionTimestampMonotonic: '16785496140'[0m
+[0;33m    Conflicts: shutdown.target[0m
+[0;33m    ControlGroup: /system.slice/NetworkManager.service[0m
+[0;33m    ControlPID: '0'[0m
+[0;33m    DefaultDependencies: 'yes'[0m
+[0;33m    Delegate: 'no'[0m
+[0;33m    Description: Network Manager[0m
+[0;33m    DevicePolicy: auto[0m
+[0;33m    Documentation: man:NetworkManager(8)[0m
+[0;33m    ExecMainCode: '0'[0m
+[0;33m    ExecMainExitTimestampMonotonic: '0'[0m
+[0;33m    ExecMainPID: '11325'[0m
+[0;33m    ExecMainStartTimestamp: Sat 2024-11-09 20:13:16 PST[0m
+[0;33m    ExecMainStartTimestampMonotonic: '16785497293'[0m
+[0;33m    ExecMainStatus: '0'[0m
+[0;33m    ExecReload: '{ path=/usr/bin/dbus-send ; argv[]=/usr/bin/dbus-send --print-reply --system --type=method_call --dest=org.freedesktop.NetworkManager /org/freedesktop/NetworkManager org.freedesktop.NetworkManager.Reload uint32:0 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }'[0m
+[0;33m    ExecStart: '{ path=/usr/sbin/NetworkManager ; argv[]=/usr/sbin/NetworkManager --no-daemon ; ignore_errors=no ; start_time=[Sat 2024-11-09 20:13:16 PST] ; stop_time=[n/a] ; pid=11325 ; code=(null) ; status=0/0 }'[0m
+[0;33m    FailureAction: none[0m
+[0;33m    FileDescriptorStoreMax: '0'[0m
+[0;33m    FragmentPath: /usr/lib/systemd/system/NetworkManager.service[0m
+[0;33m    GuessMainPID: 'yes'[0m
+[0;33m    IOScheduling: '0'[0m
+[0;33m    Id: NetworkManager.service[0m
+[0;33m    IgnoreOnIsolate: 'no'[0m
+[0;33m    IgnoreOnSnapshot: 'no'[0m
+[0;33m    IgnoreSIGPIPE: 'yes'[0m
+[0;33m    InactiveEnterTimestamp: Sat 2024-11-09 20:13:16 PST[0m
+[0;33m    InactiveEnterTimestampMonotonic: '16785494540'[0m
+[0;33m    InactiveExitTimestamp: Sat 2024-11-09 20:13:16 PST[0m
+[0;33m    InactiveExitTimestampMonotonic: '16785497423'[0m
+[0;33m    JobTimeoutAction: none[0m
+[0;33m    JobTimeoutUSec: '0'[0m
+[0;33m    KillMode: process[0m
+[0;33m    KillSignal: '15'[0m
+[0;33m    LimitAS: '18446744073709551615'[0m
+[0;33m    LimitCORE: '18446744073709551615'[0m
+[0;33m    LimitCPU: '18446744073709551615'[0m
+[0;33m    LimitDATA: '18446744073709551615'[0m
+[0;33m    LimitFSIZE: '18446744073709551615'[0m
+[0;33m    LimitLOCKS: '18446744073709551615'[0m
+[0;33m    LimitMEMLOCK: '65536'[0m
+[0;33m    LimitMSGQUEUE: '819200'[0m
+[0;33m    LimitNICE: '0'[0m
+[0;33m    LimitNOFILE: '4096'[0m
+[0;33m    LimitNPROC: '3805'[0m
+[0;33m    LimitRSS: '18446744073709551615'[0m
+[0;33m    LimitRTPRIO: '0'[0m
+[0;33m    LimitRTTIME: '18446744073709551615'[0m
+[0;33m    LimitSIGPENDING: '3805'[0m
+[0;33m    LimitSTACK: '18446744073709551615'[0m
+[0;33m    LoadState: loaded[0m
+[0;33m    MainPID: '11325'[0m
+[0;33m    MemoryAccounting: 'no'[0m
+[0;33m    MemoryCurrent: '18446744073709551615'[0m
+[0;33m    MemoryLimit: '18446744073709551615'[0m
+[0;33m    MountFlags: '0'[0m
+[0;33m    Names: NetworkManager.service[0m
+[0;33m    NeedDaemonReload: 'no'[0m
+[0;33m    Nice: '0'[0m
+[0;33m    NoNewPrivileges: 'no'[0m
+[0;33m    NonBlocking: 'no'[0m
+[0;33m    NotifyAccess: none[0m
+[0;33m    OOMScoreAdjust: '0'[0m
+[0;33m    OnFailureJobMode: replace[0m
+[0;33m    PermissionsStartOnly: 'no'[0m
+[0;33m    PrivateDevices: 'no'[0m
+[0;33m    PrivateNetwork: 'no'[0m
+[0;33m    PrivateTmp: 'no'[0m
+[0;33m    ProtectHome: read-only[0m
+[0;33m    ProtectSystem: 'yes'[0m
+[0;33m    RefuseManualStart: 'no'[0m
+[0;33m    RefuseManualStop: 'no'[0m
+[0;33m    RemainAfterExit: 'no'[0m
+[0;33m    RequiredBy: NetworkManager-wait-online.service[0m
+[0;33m    Requires: basic.target system.slice[0m
+[0;33m    Restart: on-failure[0m
+[0;33m    RestartUSec: 100ms[0m
+[0;33m    Result: success[0m
+[0;33m    RootDirectoryStartOnly: 'no'[0m
+[0;33m    RuntimeDirectoryMode: '0755'[0m
+[0;33m    SameProcessGroup: 'no'[0m
+[0;33m    SecureBits: '0'[0m
+[0;33m    SendSIGHUP: 'no'[0m
+[0;33m    SendSIGKILL: 'yes'[0m
+[0;33m    Slice: system.slice[0m
+[0;33m    StandardError: inherit[0m
+[0;33m    StandardInput: 'null'[0m
+[0;33m    StandardOutput: journal[0m
+[0;33m    StartLimitAction: none[0m
+[0;33m    StartLimitBurst: '5'[0m
+[0;33m    StartLimitInterval: '10000000'[0m
+[0;33m    StartupBlockIOWeight: '18446744073709551615'[0m
+[0;33m    StartupCPUShares: '18446744073709551615'[0m
+[0;33m    StatusErrno: '0'[0m
+[0;33m    StopWhenUnneeded: 'no'[0m
+[0;33m    SubState: running[0m
+[0;33m    SyslogLevelPrefix: 'yes'[0m
+[0;33m    SyslogPriority: '30'[0m
+[0;33m    SystemCallErrorNumber: '0'[0m
+[0;33m    TTYReset: 'no'[0m
+[0;33m    TTYVHangup: 'no'[0m
+[0;33m    TTYVTDisallocate: 'no'[0m
+[0;33m    TasksAccounting: 'no'[0m
+[0;33m    TasksCurrent: '18446744073709551615'[0m
+[0;33m    TasksMax: '18446744073709551615'[0m
+[0;33m    TimeoutStartUSec: 1min 30s[0m
+[0;33m    TimeoutStopUSec: 1min 30s[0m
+[0;33m    TimerSlackNSec: '50000'[0m
+[0;33m    Transient: 'no'[0m
+[0;33m    Type: dbus[0m
+[0;33m    UMask: '0022'[0m
+[0;33m    UnitFilePreset: enabled[0m
+[0;33m    UnitFileState: enabled[0m
+[0;33m    WantedBy: multi-user.target[0m
+[0;33m    Wants: network.target[0m
+[0;33m    WatchdogTimestamp: Sat 2024-11-09 20:13:16 PST[0m
+[0;33m    WatchdogTimestampMonotonic: '16785589690'[0m
+[0;33m    WatchdogUSec: '0'[0m
+[0;33mchanged: [redhat-test-01] => changed=true [0m
+[0;33m  enabled: true[0m
+[0;33m  name: NetworkManager[0m
+[0;33m  state: started[0m
+[0;33m  status:[0m
+[0;33m    ActiveEnterTimestamp: Sat 2024-11-09 20:14:15 PST[0m
+[0;33m    ActiveEnterTimestampMonotonic: '25883406935'[0m
+[0;33m    ActiveExitTimestamp: Sat 2024-11-09 20:14:15 PST[0m
+[0;33m    ActiveExitTimestampMonotonic: '25883179566'[0m
+[0;33m    ActiveState: active[0m
+[0;33m    After: basic.target systemd-journald.socket dbus.service system.slice network-pre.target[0m
+[0;33m    AllowIsolate: 'no'[0m
+[0;33m    AmbientCapabilities: '0'[0m
+[0;33m    AssertResult: 'yes'[0m
+[0;33m    AssertTimestamp: Sat 2024-11-09 20:14:15 PST[0m
+[0;33m    AssertTimestampMonotonic: '25883302585'[0m
+[0;33m    Before: shutdown.target network.service network.target NetworkManager-wait-online.service multi-user.target[0m
+[0;33m    BlockIOAccounting: 'no'[0m
+[0;33m    BlockIOWeight: '18446744073709551615'[0m
+[0;33m    BusName: org.freedesktop.NetworkManager[0m
+[0;33m    CPUAccounting: 'no'[0m
+[0;33m    CPUQuotaPerSecUSec: infinity[0m
+[0;33m    CPUSchedulingPolicy: '0'[0m
+[0;33m    CPUSchedulingPriority: '0'[0m
+[0;33m    CPUSchedulingResetOnFork: 'no'[0m
+[0;33m    CPUShares: '18446744073709551615'[0m
+[0;33m    CanIsolate: 'no'[0m
+[0;33m    CanReload: 'yes'[0m
+[0;33m    CanStart: 'yes'[0m
+[0;33m    CanStop: 'yes'[0m
+[0;33m    CapabilityBoundingSet: '539309282'[0m
+[0;33m    ConditionResult: 'yes'[0m
+[0;33m    ConditionTimestamp: Sat 2024-11-09 20:14:15 PST[0m
+[0;33m    ConditionTimestampMonotonic: '25883302584'[0m
+[0;33m    Conflicts: shutdown.target[0m
+[0;33m    ControlGroup: /system.slice/NetworkManager.service[0m
+[0;33m    ControlPID: '0'[0m
+[0;33m    DefaultDependencies: 'yes'[0m
+[0;33m    Delegate: 'no'[0m
+[0;33m    Description: Network Manager[0m
+[0;33m    DevicePolicy: auto[0m
+[0;33m    Documentation: man:NetworkManager(8)[0m
+[0;33m    ExecMainCode: '0'[0m
+[0;33m    ExecMainExitTimestampMonotonic: '0'[0m
+[0;33m    ExecMainPID: '13962'[0m
+[0;33m    ExecMainStartTimestamp: Sat 2024-11-09 20:14:15 PST[0m
+[0;33m    ExecMainStartTimestampMonotonic: '25883304229'[0m
+[0;33m    ExecMainStatus: '0'[0m
+[0;33m    ExecReload: '{ path=/usr/bin/dbus-send ; argv[]=/usr/bin/dbus-send --print-reply --system --type=method_call --dest=org.freedesktop.NetworkManager /org/freedesktop/NetworkManager org.freedesktop.NetworkManager.Reload uint32:0 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }'[0m
+[0;33m    ExecStart: '{ path=/usr/sbin/NetworkManager ; argv[]=/usr/sbin/NetworkManager --no-daemon ; ignore_errors=no ; start_time=[Sat 2024-11-09 20:14:15 PST] ; stop_time=[n/a] ; pid=13962 ; code=(null) ; status=0/0 }'[0m
+[0;33m    FailureAction: none[0m
+[0;33m    FileDescriptorStoreMax: '0'[0m
+[0;33m    FragmentPath: /usr/lib/systemd/system/NetworkManager.service[0m
+[0;33m    GuessMainPID: 'yes'[0m
+[0;33m    IOScheduling: '0'[0m
+[0;33m    Id: NetworkManager.service[0m
+[0;33m    IgnoreOnIsolate: 'no'[0m
+[0;33m    IgnoreOnSnapshot: 'no'[0m
+[0;33m    IgnoreSIGPIPE: 'yes'[0m
+[0;33m    InactiveEnterTimestamp: Sat 2024-11-09 20:14:15 PST[0m
+[0;33m    InactiveEnterTimestampMonotonic: '25883299647'[0m
+[0;33m    InactiveExitTimestamp: Sat 2024-11-09 20:14:15 PST[0m
+[0;33m    InactiveExitTimestampMonotonic: '25883304347'[0m
+[0;33m    JobTimeoutAction: none[0m
+[0;33m    JobTimeoutUSec: '0'[0m
+[0;33m    KillMode: process[0m
+[0;33m    KillSignal: '15'[0m
+[0;33m    LimitAS: '18446744073709551615'[0m
+[0;33m    LimitCORE: '18446744073709551615'[0m
+[0;33m    LimitCPU: '18446744073709551615'[0m
+[0;33m    LimitDATA: '18446744073709551615'[0m
+[0;33m    LimitFSIZE: '18446744073709551615'[0m
+[0;33m    LimitLOCKS: '18446744073709551615'[0m
+[0;33m    LimitMEMLOCK: '65536'[0m
+[0;33m    LimitMSGQUEUE: '819200'[0m
+[0;33m    LimitNICE: '0'[0m
+[0;33m    LimitNOFILE: '4096'[0m
+[0;33m    LimitNPROC: '3805'[0m
+[0;33m    LimitRSS: '18446744073709551615'[0m
+[0;33m    LimitRTPRIO: '0'[0m
+[0;33m    LimitRTTIME: '18446744073709551615'[0m
+[0;33m    LimitSIGPENDING: '3805'[0m
+[0;33m    LimitSTACK: '18446744073709551615'[0m
+[0;33m    LoadState: loaded[0m
+[0;33m    MainPID: '13962'[0m
+[0;33m    MemoryAccounting: 'no'[0m
+[0;33m    MemoryCurrent: '18446744073709551615'[0m
+[0;33m    MemoryLimit: '18446744073709551615'[0m
+[0;33m    MountFlags: '0'[0m
+[0;33m    Names: NetworkManager.service[0m
+[0;33m    NeedDaemonReload: 'no'[0m
+[0;33m    Nice: '0'[0m
+[0;33m    NoNewPrivileges: 'no'[0m
+[0;33m    NonBlocking: 'no'[0m
+[0;33m    NotifyAccess: none[0m
+[0;33m    OOMScoreAdjust: '0'[0m
+[0;33m    OnFailureJobMode: replace[0m
+[0;33m    PermissionsStartOnly: 'no'[0m
+[0;33m    PrivateDevices: 'no'[0m
+[0;33m    PrivateNetwork: 'no'[0m
+[0;33m    PrivateTmp: 'no'[0m
+[0;33m    ProtectHome: read-only[0m
+[0;33m    ProtectSystem: 'yes'[0m
+[0;33m    RefuseManualStart: 'no'[0m
+[0;33m    RefuseManualStop: 'no'[0m
+[0;33m    RemainAfterExit: 'no'[0m
+[0;33m    RequiredBy: NetworkManager-wait-online.service[0m
+[0;33m    Requires: basic.target system.slice[0m
+[0;33m    Restart: on-failure[0m
+[0;33m    RestartUSec: 100ms[0m
+[0;33m    Result: success[0m
+[0;33m    RootDirectoryStartOnly: 'no'[0m
+[0;33m    RuntimeDirectoryMode: '0755'[0m
+[0;33m    SameProcessGroup: 'no'[0m
+[0;33m    SecureBits: '0'[0m
+[0;33m    SendSIGHUP: 'no'[0m
+[0;33m    SendSIGKILL: 'yes'[0m
+[0;33m    Slice: system.slice[0m
+[0;33m    StandardError: inherit[0m
+[0;33m    StandardInput: 'null'[0m
+[0;33m    StandardOutput: journal[0m
+[0;33m    StartLimitAction: none[0m
+[0;33m    StartLimitBurst: '5'[0m
+[0;33m    StartLimitInterval: '10000000'[0m
+[0;33m    StartupBlockIOWeight: '18446744073709551615'[0m
+[0;33m    StartupCPUShares: '18446744073709551615'[0m
+[0;33m    StatusErrno: '0'[0m
+[0;33m    StopWhenUnneeded: 'no'[0m
+[0;33m    SubState: running[0m
+[0;33m    SyslogLevelPrefix: 'yes'[0m
+[0;33m    SyslogPriority: '30'[0m
+[0;33m    SystemCallErrorNumber: '0'[0m
+[0;33m    TTYReset: 'no'[0m
+[0;33m    TTYVHangup: 'no'[0m
+[0;33m    TTYVTDisallocate: 'no'[0m
+[0;33m    TasksAccounting: 'no'[0m
+[0;33m    TasksCurrent: '18446744073709551615'[0m
+[0;33m    TasksMax: '18446744073709551615'[0m
+[0;33m    TimeoutStartUSec: 1min 30s[0m
+[0;33m    TimeoutStopUSec: 1min 30s[0m
+[0;33m    TimerSlackNSec: '50000'[0m
+[0;33m    Transient: 'no'[0m
+[0;33m    Type: dbus[0m
+[0;33m    UMask: '0022'[0m
+[0;33m    UnitFilePreset: enabled[0m
+[0;33m    UnitFileState: enabled[0m
+[0;33m    WantedBy: multi-user.target[0m
+[0;33m    Wants: network.target[0m
+[0;33m    WatchdogTimestamp: Sat 2024-11-09 20:14:15 PST[0m
+[0;33m    WatchdogTimestampMonotonic: '25883405665'[0m
+[0;33m    WatchdogUSec: '0'[0m
+
+PLAY RECAP *********************************************************************
+[0;33mredhat-test-01[0m             : [0;32mok=7   [0m [0;33mchanged=2   [0m unreachable=0    failed=0    [0;36mskipped=3   [0m rescued=0    ignored=0   
+[0;33mredhat-test-02[0m             : [0;32mok=7   [0m [0;33mchanged=2   [0m unreachable=0    failed=0    [0;36mskipped=3   [0m rescued=0    ignored=0   
+[0;33mubuntu-test-01[0m             : [0;32mok=7   [0m [0;33mchanged=1   [0m unreachable=0    failed=0    [0;36mskipped=3   [0m rescued=0    [1;35mignored=1   [0m
+
+Sunday 10 November 2024  04:25:42 +0800 (0:01:17.074)       0:02:56.029 ******* 
+=============================================================================== 
+Restart NetworkManager service ----------------------------------------- 77.07s
+Backup existing /etc/resolv.conf --------------------------------------- 21.39s
+Create new /etc/resolv.conf -------------------------------------------- 20.83s
+Check if /etc/resolv.conf is a symlink --------------------------------- 17.68s
+Check if NetworkManager service exists --------------------------------- 14.20s
+Check if /etc/NetworkManager/NetworkManager.conf exists ---------------- 13.80s
+Add dns=none in NetworkManager.conf ------------------------------------- 9.33s
+Print message if NetworkManager service does not exist ------------------ 0.51s
+Print message if the file does not exist -------------------------------- 0.43s
+Remove symlink if it exists --------------------------------------------- 0.33s
+Playbook run took 0 days, 0 hours, 2 minutes, 55 seconds

@@ -1,0 +1,14 @@
+Nov 09 2024 22:29:48 - test.yaml - Gathering Facts - gather_facts - FAILED - omitted
+
+Nov 09 2024 22:31:52 - test.yaml - Print a message - debug - OK - {"msg": "This is a test message.", "_ansible_verbose_always": true, "_ansible_no_log": false, "changed": false}
+
+Nov 09 2024 22:31:53 - test.yaml - Sleep for a bit - command - FAILED - {"module_stdout": "", "module_stderr": "sudo: a password is required\n", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error", "rc": 1, "_ansible_no_log": false, "changed": false}
+
+Nov 09 2024 22:34:02 - test.yaml - Print a message - debug - OK - {"msg": "This is a test message.", "_ansible_verbose_always": true, "_ansible_no_log": false, "changed": false}
+
+Nov 09 2024 22:34:08 - test.yaml - Sleep for a bit - command - OK - {"module_args": {"_raw_params": "sleep 5", "warn": true, "_uses_shell": false, "stdin_add_newline": true, "strip_empty_ends": true, "argv": null, "chdir": null, "executable": null, "creates": null, "removes": null, "stdin": null}} => {"cmd": ["sleep", "5"], "stdout": "", "stderr": "", "rc": 0, "start": "2024-11-09 22:34:02.978505", "end": "2024-11-09 22:34:08.002003", "delta": "0:00:05.023498", "changed": true, "stdout_lines": [], "stderr_lines": [], "_ansible_no_log": false} 
+
+Nov 09 2024 22:37:11 - test.yaml - Print a message - debug - OK - {"msg": "This is a test message.", "_ansible_verbose_always": true, "_ansible_no_log": false, "changed": false}
+
+Nov 09 2024 22:37:17 - test.yaml - Sleep for a bit - command - OK - {"module_args": {"_raw_params": "sleep 5", "warn": true, "_uses_shell": false, "stdin_add_newline": true, "strip_empty_ends": true, "argv": null, "chdir": null, "executable": null, "creates": null, "removes": null, "stdin": null}} => {"cmd": ["sleep", "5"], "stdout": "", "stderr": "", "rc": 0, "start": "2024-11-09 22:37:12.290183", "end": "2024-11-09 22:37:17.313336", "delta": "0:00:05.023153", "changed": true, "stdout_lines": [], "stderr_lines": [], "_ansible_no_log": false} 
+

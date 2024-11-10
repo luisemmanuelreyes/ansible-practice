@@ -1,0 +1,395 @@
+Using /home/luisreyes/ansible-practice/ansible.cfg as config file
+
+PLAY [Configure DNS, hostname and NTP] *******************************************************************************************************************************************************
+
+TASK [Check if /etc/resolv.conf is a symlink] ************************************************************************************************************************************************
+ok: [redhat-test-02] => changed=false 
+  ansible_facts:
+    discovered_interpreter_python: /usr/bin/python
+  stat:
+    atime: 1731182843.5961092
+    attr_flags: ''
+    attributes: []
+    block_size: 4096
+    blocks: 8
+    charset: us-ascii
+    checksum: 4f388f8d905f0d3c91e97be0263ee158ef063303
+    ctime: 1731182842.5891092
+    dev: 2051
+    device_type: 0
+    executable: false
+    exists: true
+    gid: 0
+    gr_name: root
+    inode: 8389095
+    isblk: false
+    ischr: false
+    isdir: false
+    isfifo: false
+    isgid: false
+    islnk: false
+    isreg: true
+    issock: false
+    isuid: false
+    mimetype: text/plain
+    mode: '0644'
+    mtime: 1729264678.1992614
+    nlink: 1
+    path: /etc/resolv.conf
+    pw_name: root
+    readable: true
+    rgrp: true
+    roth: true
+    rusr: true
+    size: 130
+    uid: 0
+    version: '18446744073402785845'
+    wgrp: false
+    woth: false
+    writeable: true
+    wusr: true
+    xgrp: false
+    xoth: false
+    xusr: false
+ok: [redhat-test-01] => changed=false 
+  ansible_facts:
+    discovered_interpreter_python: /usr/bin/python
+  stat:
+    atime: 1731182840.4022605
+    attr_flags: ''
+    attributes: []
+    block_size: 4096
+    blocks: 8
+    charset: us-ascii
+    checksum: 4f388f8d905f0d3c91e97be0263ee158ef063303
+    ctime: 1731182839.3942604
+    dev: 2051
+    device_type: 0
+    executable: false
+    exists: true
+    gid: 0
+    gr_name: root
+    inode: 17386878
+    isblk: false
+    ischr: false
+    isdir: false
+    isfifo: false
+    isgid: false
+    islnk: false
+    isreg: true
+    issock: false
+    isuid: false
+    mimetype: text/plain
+    mode: '0644'
+    mtime: 1729264670.430219
+    nlink: 1
+    path: /etc/resolv.conf
+    pw_name: root
+    readable: true
+    rgrp: true
+    roth: true
+    rusr: true
+    size: 130
+    uid: 0
+    version: '18446744072436232888'
+    wgrp: false
+    woth: false
+    writeable: true
+    wusr: true
+    xgrp: false
+    xoth: false
+    xusr: false
+ok: [ubuntu-test-01] => changed=false 
+  ansible_facts:
+    discovered_interpreter_python: /usr/bin/python3
+  stat:
+    atime: 1731071944.1737065
+    attr_flags: ''
+    attributes: []
+    block_size: 4096
+    blocks: 0
+    charset: binary
+    ctime: 1723810212.2336485
+    dev: 64768
+    device_type: 0
+    executable: false
+    exists: true
+    gid: 0
+    gr_name: root
+    inode: 917510
+    isblk: false
+    ischr: false
+    isdir: false
+    isfifo: false
+    isgid: false
+    islnk: true
+    isreg: false
+    issock: false
+    isuid: false
+    lnk_source: /run/systemd/resolve/stub-resolv.conf
+    lnk_target: ../run/systemd/resolve/stub-resolv.conf
+    mimetype: inode/symlink
+    mode: '0777'
+    mtime: 1612200100.0
+    nlink: 1
+    path: /etc/resolv.conf
+    pw_name: root
+    readable: true
+    rgrp: true
+    roth: true
+    rusr: true
+    size: 39
+    uid: 0
+    version: null
+    wgrp: true
+    woth: true
+    writeable: true
+    wusr: true
+    xgrp: true
+    xoth: true
+    xusr: true
+
+TASK [Remove symlink if it exists] ***********************************************************************************************************************************************************
+skipping: [redhat-test-01] => changed=false 
+  skip_reason: Conditional result was False
+skipping: [redhat-test-02] => changed=false 
+  skip_reason: Conditional result was False
+changed: [ubuntu-test-01] => changed=true 
+  path: /etc/resolv.conf
+  state: absent
+
+TASK [Backup existing /etc/resolv.conf] ******************************************************************************************************************************************************
+skipping: [ubuntu-test-01] => changed=false 
+  skip_reason: Conditional result was False
+changed: [redhat-test-01] => changed=true 
+  checksum: 9f0d9560554c7bbae183542310170cdf1f96f8cf
+  dest: /etc/resolv.conf.bak
+  gid: 0
+  group: root
+  md5sum: cca55aa8967fe73935e895131f700fdb
+  mode: '0644'
+  owner: root
+  secontext: system_u:object_r:net_conf_t:s0
+  size: 263
+  src: /home/luisreyes/.ansible/tmp/ansible-tmp-1731156236.7024202-42441142693371/source
+  state: file
+  uid: 0
+changed: [redhat-test-02] => changed=true 
+  checksum: 9f0d9560554c7bbae183542310170cdf1f96f8cf
+  dest: /etc/resolv.conf.bak
+  gid: 0
+  group: root
+  md5sum: cca55aa8967fe73935e895131f700fdb
+  mode: '0644'
+  owner: root
+  secontext: system_u:object_r:net_conf_t:s0
+  size: 263
+  src: /home/testuser/.ansible/tmp/ansible-tmp-1731156236.7434971-34132596928261/source
+  state: file
+  uid: 0
+
+TASK [Create new /etc/resolv.conf] ***********************************************************************************************************************************************************
+changed: [redhat-test-01] => changed=true 
+  checksum: b0448bfd6d623b5aa2d92d02b291b1cee04faa54
+  dest: /etc/resolv.conf
+  gid: 0
+  group: root
+  md5sum: 16a41580d11b51c5f630194977d64f3b
+  mode: '0644'
+  owner: root
+  secontext: system_u:object_r:net_conf_t:s0
+  size: 106
+  src: /home/luisreyes/.ansible/tmp/ansible-tmp-1731156251.0312586-220925850725107/source
+  state: file
+  uid: 0
+changed: [ubuntu-test-01] => changed=true 
+  checksum: b0448bfd6d623b5aa2d92d02b291b1cee04faa54
+  dest: /etc/resolv.conf
+  gid: 0
+  group: root
+  md5sum: 16a41580d11b51c5f630194977d64f3b
+  mode: '0644'
+  owner: root
+  size: 106
+  src: /home/luisreyes/.ansible/tmp/ansible-tmp-1731156250.9711459-131283392754590/source
+  state: file
+  uid: 0
+changed: [redhat-test-02] => changed=true 
+  checksum: b0448bfd6d623b5aa2d92d02b291b1cee04faa54
+  dest: /etc/resolv.conf
+  gid: 0
+  group: root
+  md5sum: 16a41580d11b51c5f630194977d64f3b
+  mode: '0644'
+  owner: root
+  secontext: system_u:object_r:net_conf_t:s0
+  size: 106
+  src: /home/testuser/.ansible/tmp/ansible-tmp-1731156251.0664535-171775239199882/source
+  state: file
+  uid: 0
+
+TASK [Add dns=none in NetworkManager.conf] ***************************************************************************************************************************************************
+changed: [redhat-test-01] => changed=true 
+  backup: ''
+  msg: line added
+fatal: [ubuntu-test-01]: FAILED! => 
+  msg: 'Timeout (12s) waiting for privilege escalation prompt: '
+fatal: [redhat-test-02]: FAILED! => 
+  msg: 'Timeout (12s) waiting for privilege escalation prompt: '
+
+TASK [Restart NetworkManager service] ********************************************************************************************************************************************************
+changed: [redhat-test-01] => changed=true 
+  enabled: true
+  name: NetworkManager
+  state: started
+  status:
+    ActiveEnterTimestamp: Sat 2024-11-09 11:50:58 PST
+    ActiveEnterTimestampMonotonic: '37497220'
+    ActiveExitTimestampMonotonic: '0'
+    ActiveState: active
+    After: systemd-journald.socket basic.target system.slice dbus.service network-pre.target
+    AllowIsolate: 'no'
+    AmbientCapabilities: '0'
+    AssertResult: 'yes'
+    AssertTimestamp: Sat 2024-11-09 11:50:57 PST
+    AssertTimestampMonotonic: '36828533'
+    Before: shutdown.target NetworkManager-wait-online.service network.target network.service multi-user.target
+    BlockIOAccounting: 'no'
+    BlockIOWeight: '18446744073709551615'
+    BusName: org.freedesktop.NetworkManager
+    CPUAccounting: 'no'
+    CPUQuotaPerSecUSec: infinity
+    CPUSchedulingPolicy: '0'
+    CPUSchedulingPriority: '0'
+    CPUSchedulingResetOnFork: 'no'
+    CPUShares: '18446744073709551615'
+    CanIsolate: 'no'
+    CanReload: 'yes'
+    CanStart: 'yes'
+    CanStop: 'yes'
+    CapabilityBoundingSet: '539309282'
+    ConditionResult: 'yes'
+    ConditionTimestamp: Sat 2024-11-09 11:50:57 PST
+    ConditionTimestampMonotonic: '36828532'
+    Conflicts: shutdown.target
+    ControlGroup: /system.slice/NetworkManager.service
+    ControlPID: '0'
+    DefaultDependencies: 'yes'
+    Delegate: 'no'
+    Description: Network Manager
+    DevicePolicy: auto
+    Documentation: man:NetworkManager(8)
+    ExecMainCode: '0'
+    ExecMainExitTimestampMonotonic: '0'
+    ExecMainPID: '744'
+    ExecMainStartTimestamp: Sat 2024-11-09 11:50:57 PST
+    ExecMainStartTimestampMonotonic: '36855710'
+    ExecMainStatus: '0'
+    ExecReload: '{ path=/usr/bin/dbus-send ; argv[]=/usr/bin/dbus-send --print-reply --system --type=method_call --dest=org.freedesktop.NetworkManager /org/freedesktop/NetworkManager org.freedesktop.NetworkManager.Reload uint32:0 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }'
+    ExecStart: '{ path=/usr/sbin/NetworkManager ; argv[]=/usr/sbin/NetworkManager --no-daemon ; ignore_errors=no ; start_time=[Sat 2024-11-09 11:50:57 PST] ; stop_time=[n/a] ; pid=744 ; code=(null) ; status=0/0 }'
+    FailureAction: none
+    FileDescriptorStoreMax: '0'
+    FragmentPath: /usr/lib/systemd/system/NetworkManager.service
+    GuessMainPID: 'yes'
+    IOScheduling: '0'
+    Id: NetworkManager.service
+    IgnoreOnIsolate: 'no'
+    IgnoreOnSnapshot: 'no'
+    IgnoreSIGPIPE: 'yes'
+    InactiveEnterTimestampMonotonic: '0'
+    InactiveExitTimestamp: Sat 2024-11-09 11:50:57 PST
+    InactiveExitTimestampMonotonic: '36860766'
+    JobTimeoutAction: none
+    JobTimeoutUSec: '0'
+    KillMode: process
+    KillSignal: '15'
+    LimitAS: '18446744073709551615'
+    LimitCORE: '18446744073709551615'
+    LimitCPU: '18446744073709551615'
+    LimitDATA: '18446744073709551615'
+    LimitFSIZE: '18446744073709551615'
+    LimitLOCKS: '18446744073709551615'
+    LimitMEMLOCK: '65536'
+    LimitMSGQUEUE: '819200'
+    LimitNICE: '0'
+    LimitNOFILE: '4096'
+    LimitNPROC: '3805'
+    LimitRSS: '18446744073709551615'
+    LimitRTPRIO: '0'
+    LimitRTTIME: '18446744073709551615'
+    LimitSIGPENDING: '3805'
+    LimitSTACK: '18446744073709551615'
+    LoadState: loaded
+    MainPID: '744'
+    MemoryAccounting: 'no'
+    MemoryCurrent: '18446744073709551615'
+    MemoryLimit: '18446744073709551615'
+    MountFlags: '0'
+    Names: NetworkManager.service
+    NeedDaemonReload: 'no'
+    Nice: '0'
+    NoNewPrivileges: 'no'
+    NonBlocking: 'no'
+    NotifyAccess: none
+    OOMScoreAdjust: '0'
+    OnFailureJobMode: replace
+    PermissionsStartOnly: 'no'
+    PrivateDevices: 'no'
+    PrivateNetwork: 'no'
+    PrivateTmp: 'no'
+    ProtectHome: read-only
+    ProtectSystem: 'yes'
+    RefuseManualStart: 'no'
+    RefuseManualStop: 'no'
+    RemainAfterExit: 'no'
+    RequiredBy: NetworkManager-wait-online.service
+    Requires: basic.target system.slice
+    Restart: on-failure
+    RestartUSec: 100ms
+    Result: success
+    RootDirectoryStartOnly: 'no'
+    RuntimeDirectoryMode: '0755'
+    SameProcessGroup: 'no'
+    SecureBits: '0'
+    SendSIGHUP: 'no'
+    SendSIGKILL: 'yes'
+    Slice: system.slice
+    StandardError: inherit
+    StandardInput: 'null'
+    StandardOutput: journal
+    StartLimitAction: none
+    StartLimitBurst: '5'
+    StartLimitInterval: '10000000'
+    StartupBlockIOWeight: '18446744073709551615'
+    StartupCPUShares: '18446744073709551615'
+    StatusErrno: '0'
+    StopWhenUnneeded: 'no'
+    SubState: running
+    SyslogLevelPrefix: 'yes'
+    SyslogPriority: '30'
+    SystemCallErrorNumber: '0'
+    TTYReset: 'no'
+    TTYVHangup: 'no'
+    TTYVTDisallocate: 'no'
+    TasksAccounting: 'no'
+    TasksCurrent: '18446744073709551615'
+    TasksMax: '18446744073709551615'
+    TimeoutStartUSec: 1min 30s
+    TimeoutStopUSec: 1min 30s
+    TimerSlackNSec: '50000'
+    Transient: 'no'
+    Type: dbus
+    UMask: '0022'
+    UnitFilePreset: enabled
+    UnitFileState: enabled
+    WantedBy: multi-user.target
+    Wants: network.target
+    WatchdogTimestamp: Sat 2024-11-09 11:50:58 PST
+    WatchdogTimestampMonotonic: '37495640'
+    WatchdogUSec: '0'
+
+PLAY RECAP ***********************************************************************************************************************************************************************************
+redhat-test-01             : ok=5    changed=4    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+redhat-test-02             : ok=3    changed=2    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+ubuntu-test-01             : ok=3    changed=2    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+

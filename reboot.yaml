@@ -1,0 +1,12 @@
+---
+- name: Reboot the machine
+  hosts: all
+  gather_facts: false
+  become: yes
+  vars_files:
+    - vault.yml
+
+  tasks:
+    - name: Reboot the machine
+      ansible.builtin.reboot:
+        
